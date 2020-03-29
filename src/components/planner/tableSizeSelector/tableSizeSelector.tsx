@@ -11,6 +11,7 @@ function mapDispatchToProps(dispatch: any) {
 
 const tableSizeProps = (state: IPlannerReducer) => {
     return { tableSize: state.planner.tableSize }
+
 }
 
 class ConnectedTableSizeSelector extends Component {
