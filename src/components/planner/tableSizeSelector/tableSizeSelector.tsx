@@ -2,8 +2,9 @@ import { IPlannerReducer } from "../../../redux/reducers/planner.reducers";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { selectPlayerNumber } from "../../../redux/actions/planner.actions";
+import { Dispatch, AnyAction } from "redux";
 
-function mapDispatchToProps(dispatch: any) {
+function mapDispatchToProps(dispatch: Dispatch<AnyAction>) {
     return {
         selectPlayerNumber: (number: 4|6|8) => dispatch(selectPlayerNumber(number))
     };
@@ -13,8 +14,10 @@ const tableSizeProps = (state: IPlannerReducer) => {
     return { tableSize: state.planner.tableSize }
 }
 
-class ConnectedTableSizeSelector extends Component {
-    constructor(props: any) {
+type TtableSizeProps = ReturnType<typeof tableSizeProps> & ReturnType<typeof mapDispatchToProps>;
+
+class ConnectedTableSizeSelector extends Component<TtableSizeProps, {}> {
+    constructor(props: TtableSizeProps) {
       super(props);
       this.state = {
         tableSize: 4
@@ -22,10 +25,10 @@ class ConnectedTableSizeSelector extends Component {
       this.handleChange = this.handleChange.bind(this);
     }
     handleChange(event: any) {
-        (this.props as any).selectPlayerNumber(+event.target.value);
+        this.props.selectPlayerNumber(+event.target.value as 4|6|8);
     }
     render() {
-        const {tableSize} = this.props as any;
+        const {tableSize} = this.props;
         return (
             <form>
                 <div className="radio">
