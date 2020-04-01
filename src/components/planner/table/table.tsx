@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Seat from '../seat/seat';
 import { IPlannerReducer } from '../../../redux/reducers/planner.reducers';
 import { connect } from 'react-redux';
 import { Card, CardContent, GridList, GridListTile, Grid } from '@material-ui/core';
