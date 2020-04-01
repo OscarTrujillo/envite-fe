@@ -1,0 +1,22 @@
+.table {
+    text-align: -webkit-center;
+
+    .tableColumn {
+        width: 15rem;
+        .invitedCard, .disabledCard {
+            height: 100%;
+            cursor: pointer;
+        }
+        .disabledCard {
+            background: rgba(0, 0, 0, 0.26);
+            cursor: unset;
+        }
+        .gridListUserName {
+            height: 192px !important;
+            padding-bottom: 16px;
+            .userCard {
+                height: 100%;
+            }
+        }
+    }
+}

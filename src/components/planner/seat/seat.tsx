@@ -1,5 +1,5 @@
 import React from 'react';
-import './seat.css';
+import './seat.scss';
 
 function Seat() {
   return (
