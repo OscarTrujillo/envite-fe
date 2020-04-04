@@ -14,10 +14,6 @@ type TtableSizeProps = ReturnType<typeof tableSizeProps>;
 
 class ConnectedTable extends Component<TtableSizeProps, {}> {
     render() {
-        // const seats = [];
-        // for (let i = 0; i < this.props.tableSize; i++) {
-        //     seats.push(<Seat/>)
-        // }
         return (
             <div className="table">
 
