@@ -1,4 +1,4 @@
-import planner from './planner.reducers';
+import planner from './planner.reducer';
 import { combineReducers } from "redux";
 
 const rootReducer = combineReducers({

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from "react-redux";
-import { IPlannerReducer, IPlannerState } from '../../redux/reducers/planner.reducers';
+import { IPlannerReducer, IPlannerState } from '../../redux/reducers/planner.reducer';
 import TableSizeSelector from './tableSizeSelector/tableSizeSelector';
 import Table from './table/table';
 import { Grid } from '@material-ui/core';
