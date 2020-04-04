@@ -1,33 +1,26 @@
+// import * as Protocol from '../../../constants/Protocol.js';
 import io from 'socket.io-client';
-import { Middleware } from 'redux';
 
-export default function socketMiddleware(): Middleware {
-  const socket = io('http://localhost:3000');
-  console.log('socket connected', socket);
-  return ({ dispatch }) => next => action => {
-    if (typeof action === 'function') {
-      return next(action);
-    }
-debugger;
-    const {
-      event,
-      leave,
-      handle,
-      ...rest
-    } = action;
-
-    if (!event) {
-      return next(action);
+// Socket manager
+export default class Socket {
+    
+    private socket = io.Socket;
+    
+    constructor() {
+        this.connect();
     }
 
-    if (leave) {
-      socket.removeListener(event);
-    }
+    connect = () => {
+        // Connect
+        const host = `http://localhost:3000`;
+        this.socket = io.connect(host);
 
-    let handleEvent = handle;
-    if (typeof handleEvent === 'string') {
-      handleEvent = (result: any) => dispatch({ type: handle, result, ...rest });
-    }
-    return socket.on(event, handleEvent);
-  };
+        // Set listeners
+        this.socket.on('connect', this.onConnected);
+    };
+
+    // Received connect event from socket
+    onConnected = () => {
+        console.log('connected');
+    };
 }
