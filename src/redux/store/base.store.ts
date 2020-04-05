@@ -22,7 +22,7 @@ function configureStore(preloadedState?: any) {
   // Hot reloading
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers
-    module.hot.accept('./reducers', () => {
+    module.hot.accept('../reducers/base.reducer', () => {
       store.replaceReducer(rootReducer(history));
     });
   }
