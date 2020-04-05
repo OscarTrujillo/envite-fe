@@ -21,21 +21,21 @@ class ConnectedTable extends Component<TtableSizeProps, {}> {
                     <Grid item className="tableColumn">
                         <GridList cellHeight={80} cols={1} spacing={16}>
                             <GridListTile key='1' cols={1} rows={1}>
-                                <Card className="invitedCard" variant="outlined">
+                                <Card className="readTeamInvited" variant="outlined">
                                     <CardContent>
                                         <AddIcon/>
                                     </CardContent>
                                 </Card>
                             </GridListTile>
                             <GridListTile key='4' cols={1}>
-                                <Card className={this.props.tableSize > 4 ? 'invitedCard' : 'disabledCard'} variant="outlined">
+                                <Card className={this.props.tableSize > 4 ? 'blueTeamInvited' : 'disabledCard'} variant="outlined">
                                     <CardContent>
                                         <AddIcon/>
                                     </CardContent>
                                 </Card>
                             </GridListTile>
                             <GridListTile key='6' cols={1} rows={1}>
-                                <Card className={this.props.tableSize > 6 ? 'invitedCard' : 'disabledCard'} variant="outlined">
+                                <Card className={this.props.tableSize > 6 ? 'readTeamInvited' : 'disabledCard'} variant="outlined">
                                     <CardContent>
                                         <AddIcon/>
                                     </CardContent>
@@ -53,7 +53,7 @@ class ConnectedTable extends Component<TtableSizeProps, {}> {
                                 </Card>
                             </GridListTile>
                             <GridListTile key='3' cols={1} rows={1}>
-                                <Card className="invitedCard" variant="outlined">
+                                <Card className={this.props.tableSize === 6 ? 'readTeamInvited' : 'blueTeamInvited'} variant="outlined">
                                     <CardContent>
                                         <AddIcon/>
                                     </CardContent>
@@ -64,21 +64,21 @@ class ConnectedTable extends Component<TtableSizeProps, {}> {
                     <Grid item className="tableColumn">
                         <GridList cellHeight={80} cols={1} spacing={16}>
                             <GridListTile key='2' cols={1} rows={1}>
-                                <Card className="invitedCard" variant="outlined">
+                                <Card className="readTeamInvited" variant="outlined">
                                     <CardContent>
                                         <AddIcon/>
                                     </CardContent>
                                 </Card>
                             </GridListTile>
                             <GridListTile key='5' cols={1}>
-                                <Card className={this.props.tableSize > 4 ? 'invitedCard' : 'disabledCard'} variant="outlined">
+                                <Card className={this.props.tableSize > 4 ? 'blueTeamInvited' : 'disabledCard'} variant="outlined">
                                     <CardContent>
                                         <AddIcon/>
                                     </CardContent>
                                 </Card>
                             </GridListTile>
                             <GridListTile key='7' cols={1} rows={1}>
-                                <Card className={this.props.tableSize > 6 ? 'invitedCard' : 'disabledCard'} variant="outlined">
+                                <Card className={this.props.tableSize > 6 ? 'readTeamInvited' : 'disabledCard'} variant="outlined">
                                     <CardContent>
                                         <AddIcon/>
                                     </CardContent>
