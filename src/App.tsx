@@ -6,6 +6,8 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import './App.scss';
 import { ConnectedRouter } from 'connected-react-router';
 import { History } from 'history';
+import Login from './components/login/login';
+import SignUp from './components/signup/signup';
 
 interface AppProps {
   history: History;
@@ -15,9 +17,15 @@ const App = ({ history }: AppProps) => {
   return (
     <ConnectedRouter history={history}>
       <CssBaseline />
-      <div className="App">
+      <div className="app">
         <Container maxWidth="lg">
           <Switch>
+            <Route exact path="/signup">
+              <SignUp/>
+            </Route>
+            <Route exact path="/login">
+              <Login/>
+            </Route>
             <Route path="/home">
               <Home/>
             </Route>
