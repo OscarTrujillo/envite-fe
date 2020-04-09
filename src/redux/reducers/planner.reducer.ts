@@ -1,5 +1,5 @@
-import { EPlannerActionTypes } from '../actions/planner.action';
-import { IplannerAction } from '../actions/planner.action';
+import { EPlannerActionTypes } from '../actions/planner.actions';
+import { IplannerAction } from '../actions/planner.actions';
 
 export interface IPlannerReducer {
   planner: IPlannerState;

@@ -1,8 +1,8 @@
-// import * as Protocol from '../../../constants/Protocol.js';
+import { Middleware } from "redux";
 import io from 'socket.io-client';
 
 // Socket manager
-export default class Socket {
+class Socket {
     
     private socket = io.Socket;
     
@@ -24,3 +24,27 @@ export default class Socket {
         console.log('connected');
     };
 }
+
+
+const socketMiddleware: Middleware = store => {
+
+    const socket = new Socket(
+    );
+
+    // Return the handler that will be called for each action dispatched
+    return next => action => {
+        switch (action.type){
+
+            case 'socket/connect':
+                socket.connect();
+                break;
+
+            default:
+                break;
+        }
+
+        return next(action)
+    };
+};
+
+export default socketMiddleware;

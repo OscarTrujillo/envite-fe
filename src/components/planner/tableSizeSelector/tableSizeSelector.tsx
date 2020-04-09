@@ -1,13 +1,13 @@
 import { IPlannerReducer } from "../../../redux/reducers/planner.reducer";
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { selectPlayerNumber } from "../../../redux/actions/planner.action";
+import { selectPlayerNumber } from "../../../redux/actions/planner.actions";
 import { Dispatch, AnyAction } from "redux";
 import { RadioGroup, FormControlLabel, Radio, FormControl } from "@material-ui/core";
 
 function mapDispatchToProps(dispatch: Dispatch<AnyAction>) {
   return {
-      selectPlayerNumber: (number: 4|6|8) => dispatch(selectPlayerNumber(number))
+    selectPlayerNumber: (number: 4|6|8) => dispatch(selectPlayerNumber(number))
   };
 }
 
@@ -31,17 +31,17 @@ class ConnectedTableSizeSelector extends Component<TtableSizeProps, {}> {
   render() {
     const {tableSize} = this.props;
     return (
-        <FormControl component="fieldset">
-          <RadioGroup aria-label="size" name="size" value={String(tableSize)} onChange={this.handleChange}>
-            <FormControlLabel value="4" control={<Radio />} label="4" />
-            <FormControlLabel value="6" control={<Radio />} label="6" />
-            <FormControlLabel value="8" control={<Radio />} label="8" />
-          </RadioGroup>
-        </FormControl>
+      <FormControl component="fieldset">
+        <RadioGroup aria-label="size" name="size" value={String(tableSize)} onChange={this.handleChange}>
+          <FormControlLabel value="4" control={<Radio />} label="4" />
+          <FormControlLabel value="6" control={<Radio />} label="6" />
+          <FormControlLabel value="8" control={<Radio />} label="8" />
+        </RadioGroup>
+      </FormControl>
     );
   }
 }
 
-  const TableSizeSelector = connect(tableSizeProps, mapDispatchToProps)(ConnectedTableSizeSelector);
+const TableSizeSelector = connect(tableSizeProps, mapDispatchToProps)(ConnectedTableSizeSelector);
   
-  export default TableSizeSelector;   
+export default TableSizeSelector;   

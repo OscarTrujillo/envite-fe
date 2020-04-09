@@ -1,8 +1,10 @@
+import { apiAuthorizationMiddleware } from './../middlewares/apiAuthorization.middleware';
 import { createBrowserHistory } from 'history'
 import { applyMiddleware, compose, createStore } from 'redux'
 import { routerMiddleware } from 'connected-react-router'
 import rootReducer from '../reducers/base.reducer'
-import socketMiddleware from '../middlewares/base.middleware'
+import { apiMiddleware } from 'redux-api-middleware'
+import socketMiddleware from '../middlewares/socket.middleware';
 
 export const history = createBrowserHistory()
 
@@ -13,8 +15,11 @@ function configureStore(preloadedState?: any) {
     preloadedState,
     composeEnhancer(
       applyMiddleware(
+        // apiAuthorizationMiddleware,
+        // apiMiddleware,
         routerMiddleware(history),
         socketMiddleware
+        // thunkMiddleware
       ),
     ),
   )
