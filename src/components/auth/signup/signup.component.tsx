@@ -9,23 +9,45 @@ import Button from "@material-ui/core/Button";
 import { connect } from 'react-redux';
 import { AnyAction } from 'redux';
 import { ThunkDispatch } from "redux-thunk";
-import { register } from '../../redux/actions/auth.actions';
+import { register } from '../../../redux/actions/auth.actions';
+import { History } from 'history';
+import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
+import { authConstants } from '../../../redux/store/constants.store';
+
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    textfiled: {
+      height: '63px',
+      marginBottom: '0',
+    },
+    actionButton: {
+      marginLeft: 'auto'
+    },
+    actions: {
+      padding: '0 16px 16px 16px'
+    }
+  }),
+);
 
 interface FormValues {
   email: string;
   password: string;
+  passwordTwo: string;
 }
 
 interface OtherProps {
-  title?: string;
+  // title?: string;
 }
 
-interface MyFormProps {
+interface ISignUpProps {
   initialEmail?: string;
   initialPassword?: string;
+  history: History;
 }
 
 const Form = (props: OtherProps & FormikProps<FormValues>) => {
+  const classes = useStyles();
   const {
     values,
     errors,
@@ -34,7 +56,7 @@ const Form = (props: OtherProps & FormikProps<FormValues>) => {
     handleBlur,
     handleSubmit,
     isSubmitting,
-    title
+    // title
   } = props;
 
   return (
@@ -43,6 +65,7 @@ const Form = (props: OtherProps & FormikProps<FormValues>) => {
         <Card className='card'>
           <CardContent>
             <TextField
+                className={classes.textfiled}
                 id="email"
                 label="Email"
                 value={values.email}
@@ -55,6 +78,7 @@ const Form = (props: OtherProps & FormikProps<FormValues>) => {
                 fullWidth
               />
             <TextField
+                className={classes.textfiled}
                 id="password"
                 label="Password"
                 type="password"
@@ -67,9 +91,27 @@ const Form = (props: OtherProps & FormikProps<FormValues>) => {
                 variant="outlined"
                 fullWidth
               />
+            <TextField
+                className={classes.textfiled}
+                id="passwordTwo"
+                value={values.passwordTwo}
+                label="Repeat password"
+                type='password'
+                onChange={handleChange}
+                onBlur={handleBlur}
+
+                helperText={touched.passwordTwo ? errors.passwordTwo : ""}
+                error={touched.passwordTwo && Boolean(errors.passwordTwo)}
+                margin="dense"
+                variant="outlined"
+                fullWidth
+              />
+
             </CardContent>
-            <CardActions className='actions'>          
+            <CardActions className={classes.actions}>          
               <Button
+                  className={classes.actionButton}
+                  variant="outlined"
                   type="submit"
                   disabled={
                       isSubmitting ||
@@ -93,17 +135,27 @@ function actionCreator(dispatch: ThunkDispatch<any, any, AnyAction>) {
   };
 }
 
-const formikSignUp = withFormik<MyFormProps & ReturnType<typeof actionCreator>, FormValues>({
+const formikSignUp = withFormik<ISignUpProps & ReturnType<typeof actionCreator>, FormValues>({
   mapPropsToValues: props => ({
       email: props.initialEmail || "",
-      password: props.initialPassword || ""
+      password: props.initialPassword || "",
+      passwordTwo: props.initialPassword || "",
   }),
 
   validationSchema: Yup.object().shape({
     email: Yup.string()
           .email("Email not valid")
           .required("Email is required"),
-      password: Yup.string().required("Password is required")
+    password: Yup.string().required("Password is required"),
+    passwordTwo: Yup.string()
+          .required("Password is required")
+          .when("password", {
+            is: val => (val && val.length > 0 ? true : false),
+            then: Yup.string().oneOf(
+              [Yup.ref("password")],
+              "Both password need to be the same"
+            )
+          }),
   }),
 
   handleSubmit(
@@ -111,8 +163,9 @@ const formikSignUp = withFormik<MyFormProps & ReturnType<typeof actionCreator>, 
       { props, setSubmitting, setErrors }
   ) {
       console.log(email, password);
-      props.register({username: email, password});
-      // setSubmitting(false);
+      // props.register({username: email, password});
+      setSubmitting(false);
+      props.history.push('/site');
   }
 })(Form);
 

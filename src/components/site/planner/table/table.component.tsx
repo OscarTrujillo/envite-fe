@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { IPlannerReducer } from '../../../redux/reducers/planner.reducer';
+import { IPlannerReducer } from '../../../../redux/reducers/planner.reducer';
 import { connect } from 'react-redux';
 import { Card, CardContent, GridList, GridListTile, Grid } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';

@@ -1,7 +1,7 @@
-import { IPlannerReducer } from "../../../redux/reducers/planner.reducer";
+import { IPlannerReducer } from "../../../../redux/reducers/planner.reducer";
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { selectPlayerNumber } from "../../../redux/actions/planner.actions";
+import { selectPlayerNumber } from "../../../../redux/actions/planner.actions";
 import { Dispatch, AnyAction } from "redux";
 import { RadioGroup, FormControlLabel, Radio, FormControl } from "@material-ui/core";
 

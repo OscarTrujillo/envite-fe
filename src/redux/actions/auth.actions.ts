@@ -5,10 +5,10 @@ import { Dispatch, ActionCreator, Action } from 'redux';
 
 
 export const register: ActionCreator<ThunkAction<
-void,
-null,
-null,
-Action<string>
+  void,
+  null,
+  null,
+  Action<string>
 >> = (user: any) => {
     return (dispatch: Dispatch) => {
         authService.register(user)
@@ -24,7 +24,7 @@ Action<string>
             );
     };
 
-    function request(user?: any) { return { type: authConstants.REGISTER_REQUEST, user } }
+    // function request(user?: any) { return { type: authConstants.REGISTER_REQUEST, user } }
     function success(user?: any) { return { type: authConstants.REGISTER_SUCCESS, user } }
     function failure(error?: any) { return { type: authConstants.REGISTER_FAILURE, error } }
 }

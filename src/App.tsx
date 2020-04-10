@@ -1,13 +1,11 @@
 import React from 'react';
-import Planner from './components/planner/planner';
-import Home from './components/home/home';
 import { CssBaseline, Container } from '@material-ui/core';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import './App.scss';
 import { ConnectedRouter } from 'connected-react-router';
 import { History } from 'history';
-import Login from './components/login/login';
-import SignUp from './components/signup/signup';
+import AuthComponent from './components/auth/auth.component';
+import SiteComponent from './components/site/site.component';
 
 interface AppProps {
   history: History;
@@ -20,21 +18,14 @@ const App = ({ history }: AppProps) => {
       <div className="app">
         <Container maxWidth="lg">
           <Switch>
-            <Route exact path="/signup">
-              <SignUp/>
+            <Route path="/auth">
+              <AuthComponent history={history}/>
             </Route>
-            <Route exact path="/login">
-              <Login/>
+            <Route path="/site">
+              <SiteComponent history={history}/>
             </Route>
-            <Route path="/home">
-              <Home/>
-            </Route>
-            <Route exact path="/planner">
-              <Planner/>
-            </Route>
-            {/* default */}
             <Route>
-              <Redirect to="/planner" />
+              <Redirect to="/auth" />
             </Route>
           </Switch>           
         </Container>
