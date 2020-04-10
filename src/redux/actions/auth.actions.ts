@@ -1,22 +1,30 @@
+import { ThunkAction } from 'redux-thunk';
+import { authConstants } from './../store/constants.store';
 import { authService } from './../../services/auth.service';
+import { Dispatch, ActionCreator, Action } from 'redux';
 
-export const authActions = {
-  register,
-};
 
-function register(user: any) {
-  return (dispatch: (arg0: { type: string; user: any; }) => void) => {
-    dispatch(request(user));
+export const register: ActionCreator<ThunkAction<
+void,
+null,
+null,
+Action<string>
+>> = (user: any) => {
+    return (dispatch: Dispatch) => {
+        authService.register(user)
+            .then(
+                user => { 
+                    dispatch(success());
+                    // dispatch(alertActions.success('Registration successful'));
+                },
+                error => {
+                    dispatch(failure(error.toString()));
+                    // dispatch(alertActions.error(error.toString()));
+                }
+            );
+    };
 
-    authService.register(user)
-        .then(
-            user => { 
-                console.log('success');
-            },
-            error => {
-                console.log('error');
-            }
-        );
-  };
-  function request(user: any) { return { type: 'register', user } }
+    function request(user?: any) { return { type: authConstants.REGISTER_REQUEST, user } }
+    function success(user?: any) { return { type: authConstants.REGISTER_SUCCESS, user } }
+    function failure(error?: any) { return { type: authConstants.REGISTER_FAILURE, error } }
 }

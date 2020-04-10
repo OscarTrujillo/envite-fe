@@ -3,16 +3,13 @@ export const authService = {
     register,
 };
 
-
 function register(user: any) {
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(user)
     };
-
-    // return fetch(`${config.apiUrl}/users/register`, requestOptions).then(handleResponse);
-    return fetch(`http://localhost:3000/users/register`, requestOptions).then(handleResponse);
+    return fetch(`http://localhost:3000/auth/signup`, requestOptions).then(handleResponse);
 }
 
 function handleResponse(response: any) {

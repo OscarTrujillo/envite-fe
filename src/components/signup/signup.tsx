@@ -6,6 +6,10 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import Button from "@material-ui/core/Button";
+import { connect } from 'react-redux';
+import { AnyAction } from 'redux';
+import { ThunkDispatch } from "redux-thunk";
+import { register } from '../../redux/actions/auth.actions';
 
 interface FormValues {
   email: string;
@@ -63,14 +67,6 @@ const Form = (props: OtherProps & FormikProps<FormValues>) => {
                 variant="outlined"
                 fullWidth
               />
-              {/* <TextField
-              id="confirmPassword"
-              label="Confirm Password"
-              type="password"             
-              margin="dense"
-              variant="outlined"
-              fullWidth
-            /> */}
             </CardContent>
             <CardActions className='actions'>          
               <Button
@@ -91,7 +87,13 @@ const Form = (props: OtherProps & FormikProps<FormValues>) => {
   );
 }
 
-const SignUp = withFormik<MyFormProps, FormValues>({
+function actionCreator(dispatch: ThunkDispatch<any, any, AnyAction>) {
+  return {
+    register: (user:any) => dispatch(register(user))
+  };
+}
+
+const formikSignUp = withFormik<MyFormProps & ReturnType<typeof actionCreator>, FormValues>({
   mapPropsToValues: props => ({
       email: props.initialEmail || "",
       password: props.initialPassword || ""
@@ -109,7 +111,19 @@ const SignUp = withFormik<MyFormProps, FormValues>({
       { props, setSubmitting, setErrors }
   ) {
       console.log(email, password);
+      props.register({username: email, password});
+      // setSubmitting(false);
   }
 })(Form);
+
+function mapState(state: any) {
+  const { registering } = state.registration;
+  return { registering };
+}
+
+const SignUp = connect(
+  mapState,
+  actionCreator
+)(formikSignUp)
 
 export default SignUp;
