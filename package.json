@@ -16,6 +16,7 @@
     "@types/react-router": "^5.1.5",
     "@types/webpack-env": "^1.15.1",
     "@types/yup": "^0.26.34",
+    "class-transformer": "^0.2.3",
     "connected-react-router": "^6.8.0",
     "formik": "^2.1.4",
     "node-sass": "^4.13.1",
@@ -26,6 +27,7 @@
     "react-scripts": "3.4.1",
     "redux-api-middleware": "^3.2.1",
     "redux-thunk": "^2.3.0",
+    "reflect-metadata": "^0.1.13",
     "socket.io-client": "^2.3.0",
     "typescript": "~3.7.2",
     "yup": "^0.28.3"

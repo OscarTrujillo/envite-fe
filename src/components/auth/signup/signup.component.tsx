@@ -9,11 +9,10 @@ import Button from "@material-ui/core/Button";
 import { connect } from 'react-redux';
 import { AnyAction } from 'redux';
 import { ThunkDispatch } from "redux-thunk";
-import { register } from '../../../redux/actions/auth.actions';
+import { register, IAuthInput } from '../../../redux/actions/auth.actions';
 import { History } from 'history';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-import { authConstants } from '../../../redux/store/constants.store';
-
+import { IAppState } from '../../../redux/reducers/base.reducer';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -31,7 +30,8 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface FormValues {
-  email: string;
+  // email: string;
+  username: string;
   password: string;
   passwordTwo: string;
 }
@@ -41,7 +41,8 @@ interface OtherProps {
 }
 
 interface ISignUpProps {
-  initialEmail?: string;
+  // initialEmail?: string;
+  initialUsername?: string;
   initialPassword?: string;
   history: History;
 }
@@ -64,7 +65,7 @@ const Form = (props: OtherProps & FormikProps<FormValues>) => {
         <form onSubmit={handleSubmit}>
         <Card className='card'>
           <CardContent>
-            <TextField
+            {/* <TextField
                 className={classes.textfiled}
                 id="email"
                 label="Email"
@@ -73,6 +74,19 @@ const Form = (props: OtherProps & FormikProps<FormValues>) => {
                 onBlur={handleBlur}
                 helperText={touched.email ? errors.email : ""}
                 error={touched.email && Boolean(errors.email)}
+                margin="dense"
+                variant="outlined"
+                fullWidth
+              /> */}
+            <TextField
+                className={classes.textfiled}
+                id="username"
+                label="Usuario"
+                value={values.username}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                helperText={touched.username ? errors.username : ""}
+                error={touched.username && Boolean(errors.username)}
                 margin="dense"
                 variant="outlined"
                 fullWidth
@@ -115,7 +129,7 @@ const Form = (props: OtherProps & FormikProps<FormValues>) => {
                   type="submit"
                   disabled={
                       isSubmitting ||
-                      !!(errors.email && touched.email) ||
+                      !!(errors.username && touched.username) ||
                       !!(errors.password && touched.password)
                   }
               >
@@ -131,22 +145,22 @@ const Form = (props: OtherProps & FormikProps<FormValues>) => {
 
 function actionCreator(dispatch: ThunkDispatch<any, any, AnyAction>) {
   return {
-    register: (user:any) => dispatch(register(user))
+    register: (user: IAuthInput) => dispatch(register(user))
   };
 }
 
 const formikSignUp = withFormik<ISignUpProps & ReturnType<typeof actionCreator>, FormValues>({
   mapPropsToValues: props => ({
-      email: props.initialEmail || "",
+      username: props.initialUsername || "",
       password: props.initialPassword || "",
       passwordTwo: props.initialPassword || "",
   }),
 
   validationSchema: Yup.object().shape({
-    email: Yup.string()
-          .email("Email not valid")
-          .required("Email is required"),
-    password: Yup.string().required("Password is required"),
+    username: Yup.string()
+          // .email("Email not valid")
+          .required("Este camppo es requerido"),
+    password: Yup.string().required("Este camppo es requerido"),
     passwordTwo: Yup.string()
           .required("Password is required")
           .when("password", {
@@ -159,17 +173,14 @@ const formikSignUp = withFormik<ISignUpProps & ReturnType<typeof actionCreator>,
   }),
 
   handleSubmit(
-      { email, password }: FormValues,
+      { username, password }: FormValues,
       { props, setSubmitting, setErrors }
   ) {
-      console.log(email, password);
-      // props.register({username: email, password});
-      setSubmitting(false);
-      props.history.push('/site');
+      props.register({username, password});
   }
 })(Form);
 
-function mapState(state: any) {
+function mapState(state: IAppState) {
   const { registering } = state.registration;
   return { registering };
 }

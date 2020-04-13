@@ -1,15 +1,43 @@
+import { UserEntity } from './../entities/user.entity';
+import { IAuthInput } from './../redux/actions/auth.actions';
+import { plainToClass } from 'class-transformer';
 
 export const authService = {
     register,
+    login,
+    logout
 };
 
-function register(user: any) {
-    const requestOptions = {
-        method: 'POST',
+function requestOptions(body: string, method = 'POST') {
+    return {
+        method: method,
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(user)
+        body: body
     };
-    return fetch(`http://localhost:3000/auth/signup`, requestOptions).then(handleResponse);
+}
+
+function register(user: IAuthInput) {
+    const options = requestOptions(JSON.stringify(user));
+    return fetch(`http://localhost:3000/auth/signup`, options)
+        .then(handleResponse);
+}
+
+function login(user: IAuthInput) {
+    const options = requestOptions(JSON.stringify(user));
+    return fetch(`http://localhost:3000/auth/login`, options)
+        .then(handleResponse)
+        .then(user => {
+            // store user details and jwt token in local storage to keep user logged in between page refreshes
+            // localStorage.setItem('user', JSON.stringify(user));
+
+            return plainToClass(UserEntity, user, { excludeExtraneousValues: true });
+            // return user;
+        });
+}
+
+function logout() {
+    // remove user from local storage to log user out
+    localStorage.removeItem('user');
 }
 
 function handleResponse(response: any) {

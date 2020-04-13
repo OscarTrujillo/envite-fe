@@ -6,6 +6,8 @@ import { ConnectedRouter } from 'connected-react-router';
 import { History } from 'history';
 import AuthComponent from './components/auth/auth.component';
 import SiteComponent from './components/site/site.component';
+import AuthorizedRoute from './components/loginRequiredRoute.component';
+import NotLogedInRoute from './components/notLogedInRoute.component';
 
 interface AppProps {
   history: History;
@@ -18,12 +20,12 @@ const App = ({ history }: AppProps) => {
       <div className="app">
         <Container maxWidth="lg">
           <Switch>
-            <Route path="/auth">
+            <NotLogedInRoute path="/auth">
               <AuthComponent history={history}/>
-            </Route>
-            <Route path="/site">
+            </NotLogedInRoute>
+            <AuthorizedRoute path="/site">
               <SiteComponent history={history}/>
-            </Route>
+            </AuthorizedRoute>
             <Route>
               <Redirect to="/auth" />
             </Route>

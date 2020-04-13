@@ -5,6 +5,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import store, { history } from './redux/store/base.store';
+import "reflect-metadata";
 
 ReactDOM.render(
   <React.StrictMode>
