@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextField } from '@material-ui/core';
+import { TextField, Paper, Link } from '@material-ui/core';
 import { withFormik, FormikProps } from "formik";
 import * as Yup from "yup";
 import Card from "@material-ui/core/Card";
@@ -25,6 +25,14 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     actions: {
       padding: '0 16px 16px 16px'
+    },
+    bottomPaper: {
+      marginTop: "1rem",
+      padding: "16px",
+    },
+    link: {
+      marginLeft: "5px",
+      cursor: "pointer",
     }
   }),
 );
@@ -47,8 +55,11 @@ interface ISignUpProps {
   history: History;
 }
 
-const Form = (props: OtherProps & FormikProps<FormValues>) => {
+const Form = (props: ISignUpProps & FormikProps<FormValues>) => {
   const classes = useStyles();
+
+  const onclickRegister = () => props.history.push('/auth/login');
+
   const {
     values,
     errors,
@@ -62,7 +73,7 @@ const Form = (props: OtherProps & FormikProps<FormValues>) => {
 
   return (
     <div className="signup">
-        <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <Card className='card'>
           <CardContent>
             {/* <TextField
@@ -139,6 +150,13 @@ const Form = (props: OtherProps & FormikProps<FormValues>) => {
           </Card>
 
         </form>
+        <Paper elevation={1} className={classes.bottomPaper}>
+          <p>¿Tienes una cuenta?
+            <Link className={classes.link} onClick={onclickRegister}>
+              Entrar
+            </Link>
+          </p>
+        </Paper>
     </div>
   );
 }

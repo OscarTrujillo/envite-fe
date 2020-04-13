@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextField } from '@material-ui/core';
+import { TextField, Paper, Link } from '@material-ui/core';
 import { withFormik, FormikProps } from "formik";
 import * as Yup from "yup";
 import Card from "@material-ui/core/Card";
@@ -25,6 +25,14 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     actions: {
       padding: '0 16px 16px 16px'
+    },
+    bottomPaper: {
+      marginTop: "1rem",
+      padding: "16px",
+    },
+    link: {
+      marginLeft: "5px",
+      cursor: "pointer",
     }
   }),
 );
@@ -35,16 +43,17 @@ interface FormValues {
   password: string;
 }
 
-interface OtherProps {
-  // title?: string;
-}
+// interface OtherProps {
+//   // title?: string;
+// }
 
 interface ILoginProps {
   history: History;
 }
 
-const Form = (props: OtherProps & FormikProps<FormValues>) => {
+const Form = (props: ILoginProps & FormikProps<FormValues>) => {
   const classes = useStyles();
+  const onclickRegister = () => props.history.push('/auth/signup');
   const {
     values,
     errors,
@@ -105,8 +114,14 @@ const Form = (props: OtherProps & FormikProps<FormValues>) => {
               </Button>
             </CardActions>
           </Card>
-
         </form>
+        <Paper elevation={1} className={classes.bottomPaper}>
+          <p>¿No tienes una cuenta?
+            <Link className={classes.link} onClick={onclickRegister}>
+              Regístrate
+            </Link>
+          </p>
+        </Paper>
     </div>
   );
 }
