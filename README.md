@@ -3,7 +3,7 @@
 
 Canary board game.
 
-> ### frontend (React + Redux + Socket) code for **Envite App** project.
+> ### Frontend (React + Redux + Socket) code for **Envite App** project.
 
 ## Getting started
 
