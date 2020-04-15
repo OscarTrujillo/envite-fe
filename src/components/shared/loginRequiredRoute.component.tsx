@@ -1,8 +1,8 @@
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { RouteProps } from 'react-router';
-import { history } from '../redux/store/base.store';
-import { IAppState } from '../redux/reducers/base.reducer';
+import { history } from '../../redux/store/base.store';
+import { IAppState } from '../../redux/reducers/base.reducer';
 
 interface Props extends RouteProps {
     loggedIn: boolean;

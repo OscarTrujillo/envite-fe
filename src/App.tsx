@@ -6,8 +6,8 @@ import { ConnectedRouter } from 'connected-react-router';
 import { History } from 'history';
 import AuthComponent from './components/auth/auth.component';
 import SiteComponent from './components/site/site.component';
-import AuthorizedRoute from './components/loginRequiredRoute.component';
-import NotLogedInRoute from './components/notLogedInRoute.component';
+import AuthorizedRoute from './components/shared/loginRequiredRoute.component';
+import NotLogedInRoute from './components/shared/notLogedInRoute.component';
 import { persistor } from './redux/store/base.store';
 
 interface AppProps {
