@@ -26,6 +26,7 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
     "redux-api-middleware": "^3.2.1",
+    "redux-persist": "^6.0.0",
     "redux-thunk": "^2.3.0",
     "reflect-metadata": "^0.1.13",
     "socket.io-client": "^2.3.0",
@@ -33,7 +34,7 @@
     "yup": "^0.28.3"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "PORT=3001 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

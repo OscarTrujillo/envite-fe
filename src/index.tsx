@@ -4,8 +4,7 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
-import store, { history } from './redux/store/base.store';
-import "reflect-metadata";
+import { history , store} from './redux/store/base.store';
 
 ReactDOM.render(
   <React.StrictMode>

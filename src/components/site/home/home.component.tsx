@@ -7,16 +7,24 @@ interface IHomeProps {
 }
 
 function Home(props: IHomeProps) {
-  const onclick = () => props.history.push('/site/planner');; 
+  const onclickPlanner = () => props.history.push('/site/planner');
+  const onclickLogout = () => console.log('logout');
 
   return (
     <div className="home">
       <Button
         variant="outlined"
-        onClick={onclick}
+        onClick={onclickPlanner}
         type="submit"
       >
         Planner
+      </Button>
+      <Button
+        variant="outlined"
+        onClick={onclickLogout}
+        type="submit"
+      >
+        Logout
       </Button>
     </div>
   );
