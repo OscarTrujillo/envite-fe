@@ -30,7 +30,7 @@ const AuthComponent = ({ history }: AuthProps) => {
           <Grid item xs={4}>
             <Switch>
               <Route exact path="/auth/signup">
-              <   SignUp history={history}/>
+                <SignUp history={history}/>
               </Route>
               <Route exact path="/auth/login">
                 <Login history={history}/>

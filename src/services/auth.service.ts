@@ -5,7 +5,6 @@ import { plainToClass } from 'class-transformer';
 export const authService = {
     register,
     login,
-    logout
 };
 
 function requestOptions(body: string, method = 'POST') {
@@ -27,17 +26,10 @@ function login(user: IAuthInput) {
     return fetch(`http://localhost:3000/auth/login`, options)
         .then(handleResponse)
         .then(user => {
-            // store user details and jwt token in local storage to keep user logged in between page refreshes
-            // localStorage.setItem('user', JSON.stringify(user));
 
             return plainToClass(UserEntity, user, { excludeExtraneousValues: true });
             // return user;
         });
-}
-
-function logout() {
-    // remove user from local storage to log user out
-    localStorage.removeItem('user');
 }
 
 function handleResponse(response: any) {
@@ -45,9 +37,7 @@ function handleResponse(response: any) {
         const data = text && JSON.parse(text);
         if (!response.ok) {
             if (response.status === 401) {
-                // auto logout if 401 response returned from api
                 // logout();
-                // location.reload(true);
             }
 
             const error = (data && data.message) || response.statusText;

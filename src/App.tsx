@@ -27,9 +27,7 @@ export default class App extends Component<AppProps, AppState> {
   }
 
   componentWillMount(){
-    console.log('will');
     persistor.subscribe( () => {
-      console.log('persistor');
       this.setState({ rehydrated: true })
     })
   }

@@ -1,15 +1,28 @@
-import React from 'react';
+import React, { Dispatch } from 'react';
 import { Button } from '@material-ui/core';
 import { History } from 'history';
+import { logout } from '../../../redux/actions/auth.actions';
+import { AnyAction } from 'redux';
+import { connect } from 'react-redux';
+
+function mapDispatchToProps(dispatch: Dispatch<AnyAction>) {
+  return {
+    logout: () => dispatch(logout())
+  };
+}
 
 interface IHomeProps {
   history: History;
 }
 
-function Home(props: IHomeProps) {
-  const onclickPlanner = () => props.history.push('/site/planner');
-  const onclickLogout = () => console.log('logout');
+type THomeProps = IHomeProps & ReturnType<typeof mapDispatchToProps>;
 
+function Connectedome(props: THomeProps) {
+  const onclickPlanner = () => props.history.push('/site/planner');
+  const onclickLogout = () => { 
+    props.logout();
+    props.history.push('/');
+  }  
   return (
     <div className="home">
       <Button
@@ -30,5 +43,11 @@ function Home(props: IHomeProps) {
   );
 
 }
+
+const Home = connect(
+  null,
+  mapDispatchToProps
+)(Connectedome)
+
 
 export default Home;
