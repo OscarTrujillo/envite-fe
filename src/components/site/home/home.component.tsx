@@ -1,14 +1,10 @@
-import React, { Dispatch } from 'react';
+import React from 'react';
 import { Button } from '@material-ui/core';
-import { History } from 'history';
 import Logout from '../../shared/logout.component';
+import { history } from '../../../redux/store/base.store';
 
-interface IHomeProps {
-  history: History;
-}
-
-function Home(props: IHomeProps) {
-  const onclickPlanner = () => props.history.push('/site/planner');
+function Home() {
+  const onclickPlanner = () => history.push('/site/planner');
 
   return (
     <div className="home">

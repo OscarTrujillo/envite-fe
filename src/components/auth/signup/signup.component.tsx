@@ -10,9 +10,9 @@ import { connect } from 'react-redux';
 import { AnyAction } from 'redux';
 import { ThunkDispatch } from "redux-thunk";
 import { register, IAuthInput } from '../../../redux/actions/auth.actions';
-import { History } from 'history';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import { IAppState } from '../../../redux/reducers/base.reducer';
+import { history } from '../../../redux/store/base.store';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -52,13 +52,12 @@ interface ISignUpProps {
   // initialEmail?: string;
   initialUsername?: string;
   initialPassword?: string;
-  history: History;
 }
 
 const Form = (props: ISignUpProps & FormikProps<FormValues>) => {
   const classes = useStyles();
 
-  const onclickRegister = () => props.history.push('/auth/login');
+  const onclickRegister = () => history.push('/auth/login');
 
   const {
     values,

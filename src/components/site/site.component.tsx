@@ -2,16 +2,12 @@ import React from 'react';
 import { CssBaseline, Container } from '@material-ui/core';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
-import { History } from 'history';
 import './site.component.scss';
 import Home from './home/home.component';
 import Planner from './planner/planner.componet';
+import { history } from '../../redux/store/base.store';
 
-interface SiteProps {
-  history: History;
-}
-
-const SiteComponent = ({ history }: SiteProps) => {
+const SiteComponent = () => {
   return (
     <ConnectedRouter history={history}>
       <CssBaseline />
@@ -19,7 +15,7 @@ const SiteComponent = ({ history }: SiteProps) => {
         <Container >
           <Switch>
             <Route path="/site/home">
-              <Home history={history}/>
+              <Home/>
             </Route>
             <Route exact path="/site/planner">
               <Planner/>

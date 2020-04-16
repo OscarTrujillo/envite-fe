@@ -16,10 +16,6 @@ type TConnectedLogoutProps = ReturnType<typeof mapDispatchToProps>;
   
 class ConnectedLogout extends Component<TConnectedLogoutProps> {
 
-    constructor(props: TConnectedLogoutProps) {
-        super(props);
-    }
-
     onclickLogout = () => { 
         this.props.logout();
         history.push('/');

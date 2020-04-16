@@ -12,8 +12,8 @@ export interface IAuthAction {
 
 export interface IAuthInput {username: string, password: string}
 
-export const register = (user: IAuthInput): AppThunk => async dispatch => {
-    return authService.register(user)
+export const register = (authInput: IAuthInput): AppThunk => async dispatch => {
+    return authService.register(authInput)
         .then(
             user => { 
                 dispatch(success(user));
@@ -29,8 +29,8 @@ export const register = (user: IAuthInput): AppThunk => async dispatch => {
     function failure(error?: string): IAuthAction { return { type: authConstants.REGISTER_FAILURE, error } }
 };  
 
-export const login = (user: IAuthInput): AppThunk => async dispatch => {
-    return authService.login(user)
+export const login = (authInput: IAuthInput): AppThunk => async dispatch => {
+    return authService.login(authInput)
         .then(
             user => { 
                 dispatch(success(user));
