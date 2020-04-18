@@ -19,7 +19,7 @@ const plannerProps = (state: IPlannerReducer) => {
 
 function plannerActions(dispatch: ThunkDispatch<any, any, AnyAction>) {
   return {
-    startGameReducer: (game: IGameInput) => dispatch(startGame(game))
+    startGame: (game: IGameInput) => dispatch(startGame(game))
   };
 }
 
@@ -27,16 +27,13 @@ type TConnectedPlannerProps = ReturnType<typeof plannerActions> & ReturnType<typ
 
 const ConnectedSize = (props: TConnectedPlannerProps ) => {
   const onClickStartGame = () => {
-    props.startGameReducer({ roundtime: props.roundTime, numberOfPlayers: props.tableSize  })
+    props.startGame({ roundtime: props.roundTime, numberOfPlayers: props.tableSize  })
   }
 
   return(
     <div className="planner">
       <h1>
-        Tamaño de la mesa seleccionada: 
-        <span>
-          {props.tableSize}
-        </span>
+        Configuración de la partida
       </h1>
       <Grid container spacing={3}>
         <Grid item xs={2}>
@@ -45,7 +42,7 @@ const ConnectedSize = (props: TConnectedPlannerProps ) => {
           <p>time</p>
           <RoundTimeSelector/>
         </Grid>
-        <Grid item xs={8}>
+        <Grid item xs={10}>
           <Table/>
         </Grid>
       </Grid>
@@ -55,13 +52,12 @@ const ConnectedSize = (props: TConnectedPlannerProps ) => {
           type="submit"
           onClick={onClickStartGame}
           >
-          Comenzar
+          Crear partida
         </Button>
       </div>
     </div>
   )
 };
-
 
 const Planner = connect(plannerProps, plannerActions)(ConnectedSize);
 

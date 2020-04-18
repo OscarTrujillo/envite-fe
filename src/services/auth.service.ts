@@ -8,10 +8,10 @@ export const authService = {
 };
 
 function register(user: IAuthInput) {
-    return post<UserEntity>('/auth/signup', JSON.stringify(user));
+    return post<UserEntity>('/auth/signup', JSON.stringify(user), UserEntity);
 }
 
 function login(user: IAuthInput) {
-    return post<UserEntity>('/auth/login', JSON.stringify(user));
+    return post<UserEntity>('/auth/login', JSON.stringify(user), UserEntity);
 }
 

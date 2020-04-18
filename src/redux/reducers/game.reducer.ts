@@ -7,16 +7,19 @@ export interface IGameState {
 }  
 const initialState = new GameEntity();
 
-export function startGameReducer(state = initialState, action: IGameAction) {
+export function gameSate(state = initialState, action: IGameAction) {
     switch (action.type) {
       case gameConstants.GAME_CREATE_REQUEST:
+      case gameConstants.GAME_GET_REQUEST:
         return {};
       case gameConstants.GAME_CREATE_SUCCESS:
+      case gameConstants.GAME_GET_SUCCESS:
         return {
             ...state,
             game: action.game,
         };
       case gameConstants.GAME_CREATE_FAILURE:
+      case gameConstants.GAME_GET_FAILURE:
         return {};
       default:
         return state

@@ -16,11 +16,12 @@ interface AppState {
 // const App = ({ history }: AppProps) => {
 export default class App extends Component<{}, AppState> {
 
-  constructor() {
-    super({});
+  constructor(props: any) {
+    super(props);
     this.state = { rehydrated: false }
   }
 
+  // TODO: componentDidMount?
   componentWillMount(){
     persistor.subscribe( () => {
       this.setState({ rehydrated: true })

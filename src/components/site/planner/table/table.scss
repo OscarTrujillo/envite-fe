@@ -17,9 +17,13 @@
             background: rgba(0, 0, 0, 0.26);
             cursor: unset;
         }
+        .rugCard {
+            height: 100%;
+            background-color: #3db536;
+        }
         .gridListUserName {
-            height: 192px !important;
-            padding-bottom: 16px;
+            // height: 192px !important;
+            // padding-bottom: 16px;
             .userCard {
                 background-color: #4696E1;
                 height: 100%;

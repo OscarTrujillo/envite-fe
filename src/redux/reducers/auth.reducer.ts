@@ -36,14 +36,17 @@ export function authentication(state = initialState, action: IAuthAction) {
         user: action.user
       };
     case authConstants.LOGIN_SUCCESS:
+    case authConstants.REGISTER_SUCCESS:
       return {
         ...state,
         loggedIn: true,
+        loggingIn: false,
         user: action.user
       };
     case authConstants.LOGIN_FAILURE:
       return {};
     case authConstants.LOGOUT:
+      // TODO: remove cookies
       return {};
     default:
       return state

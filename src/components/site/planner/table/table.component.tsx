@@ -20,21 +20,21 @@ class ConnectedTable extends Component<TtableSizeProps, {}> {
                 <Grid container spacing={2} >
                     <Grid item className="tableColumn">
                         <GridList cellHeight={80} cols={1} spacing={16}>
-                            <GridListTile key='1' cols={1} rows={1}>
+                            <GridListTile key='1' >
                                 <Card className="readTeamInvited" variant="outlined">
                                     <CardContent>
                                         <AddIcon/>
                                     </CardContent>
                                 </Card>
                             </GridListTile>
-                            <GridListTile key='4' cols={1}>
+                            <GridListTile key='4' >
                                 <Card className={this.props.tableSize > 4 ? 'blueTeamInvited' : 'disabledCard'} variant="outlined">
                                     <CardContent>
                                         <AddIcon/>
                                     </CardContent>
                                 </Card>
                             </GridListTile>
-                            <GridListTile key='6' cols={1} rows={1}>
+                            <GridListTile key='6' >
                                 <Card className={this.props.tableSize > 6 ? 'readTeamInvited' : 'disabledCard'} variant="outlined">
                                     <CardContent>
                                         <AddIcon/>
@@ -45,14 +45,20 @@ class ConnectedTable extends Component<TtableSizeProps, {}> {
                     </Grid>
                     <Grid item className="tableColumn">
                         <GridList cellHeight={80} cols={1} spacing={16}>
-                            <GridListTile key='userGrid' className="gridListUserName" cols={1} rows={2}>
+                            <GridListTile key='userGrid' className="gridListUserName" >
                                 <Card className="userCard" variant="outlined">
-                                        <CardContent>
-                                            {'"John Doe"'}
-                                        </CardContent>
+                                    <CardContent>
+                                        {'"John Doe"'}
+                                    </CardContent>
                                 </Card>
                             </GridListTile>
-                            <GridListTile key='3' cols={1} rows={1}>
+                            <GridListTile key='rug' className="rug" >
+                                <Card className="rugCard" variant="outlined">
+                                    <CardContent>
+                                    </CardContent>
+                                </Card>
+                            </GridListTile>
+                            <GridListTile key='3' >
                                 <Card className={this.props.tableSize === 6 ? 'readTeamInvited' : 'blueTeamInvited'} variant="outlined">
                                     <CardContent>
                                         <AddIcon/>
@@ -63,21 +69,21 @@ class ConnectedTable extends Component<TtableSizeProps, {}> {
                     </Grid>
                     <Grid item className="tableColumn">
                         <GridList cellHeight={80} cols={1} spacing={16}>
-                            <GridListTile key='2' cols={1} rows={1}>
+                            <GridListTile key='2'>
                                 <Card className="readTeamInvited" variant="outlined">
                                     <CardContent>
                                         <AddIcon/>
                                     </CardContent>
                                 </Card>
                             </GridListTile>
-                            <GridListTile key='5' cols={1}>
+                            <GridListTile key='5'>
                                 <Card className={this.props.tableSize > 4 ? 'blueTeamInvited' : 'disabledCard'} variant="outlined">
                                     <CardContent>
                                         <AddIcon/>
                                     </CardContent>
                                 </Card>
                             </GridListTile>
-                            <GridListTile key='7' cols={1} rows={1}>
+                            <GridListTile key='7'>
                                 <Card className={this.props.tableSize > 6 ? 'readTeamInvited' : 'disabledCard'} variant="outlined">
                                     <CardContent>
                                         <AddIcon/>
