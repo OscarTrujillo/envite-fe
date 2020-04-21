@@ -4,12 +4,12 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
-import { history , store} from './redux/store/base.store';
+import { store} from './redux/store/base.store';
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App history={history}/>
+      <App/>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

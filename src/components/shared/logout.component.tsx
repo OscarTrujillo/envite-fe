@@ -1,12 +1,12 @@
-import React, { Dispatch } from "react";
+import React from "react";
 import { Component } from "react";
 import { Button } from "@material-ui/core";
-import { history } from '../../redux/store/base.store';
 import { AnyAction } from "redux";
 import { connect } from "react-redux";
 import { logout } from "../../redux/actions/auth.actions";
+import { ThunkDispatch } from "redux-thunk";
 
-function mapDispatchToProps(dispatch: Dispatch<AnyAction>) {
+function mapDispatchToProps(dispatch: ThunkDispatch<any, any, AnyAction>) {
     return {
       logout: () => dispatch(logout())
     };
@@ -16,13 +16,8 @@ type TConnectedLogoutProps = ReturnType<typeof mapDispatchToProps>;
   
 class ConnectedLogout extends Component<TConnectedLogoutProps> {
 
-    constructor(props: TConnectedLogoutProps) {
-        super(props);
-    }
-
     onclickLogout = () => { 
         this.props.logout();
-        history.push('/');
     }  
     
     render() {

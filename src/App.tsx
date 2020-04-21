@@ -3,29 +3,25 @@ import { CssBaseline, Container } from '@material-ui/core';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import './App.scss';
 import { ConnectedRouter } from 'connected-react-router';
-import { History } from 'history';
 import AuthComponent from './components/auth/auth.component';
 import SiteComponent from './components/site/site.component';
 import AuthorizedRoute from './components/shared/loginRequiredRoute.component';
 import NotLogedInRoute from './components/shared/notLogedInRoute.component';
-import { persistor } from './redux/store/base.store';
-
-interface AppProps {
-  history: History;
-}
+import { persistor, history } from './redux/store/base.store';
 
 interface AppState {
   rehydrated: boolean;
 }
 
 // const App = ({ history }: AppProps) => {
-export default class App extends Component<AppProps, AppState> {
+export default class App extends Component<{}, AppState> {
 
-  constructor(props: AppProps) {
+  constructor(props: any) {
     super(props);
     this.state = { rehydrated: false }
   }
 
+  // TODO: componentDidMount?
   componentWillMount(){
     persistor.subscribe( () => {
       this.setState({ rehydrated: true })
@@ -37,16 +33,16 @@ export default class App extends Component<AppProps, AppState> {
       return <div>Loading...</div>
     }
     return (
-      <ConnectedRouter history={this.props.history}>
+      <ConnectedRouter history={history}>
         <CssBaseline />
         <div className="app">
-          <Container maxWidth="lg">
+          <Container>
             <Switch>
               <NotLogedInRoute path="/auth">
-                <AuthComponent history={this.props.history}/>
+                <AuthComponent/>
               </NotLogedInRoute>
               <AuthorizedRoute path="/site">
-                <SiteComponent history={this.props.history}/>
+                <SiteComponent/>
               </AuthorizedRoute>
               <Route>
                 <Redirect to="/auth" />

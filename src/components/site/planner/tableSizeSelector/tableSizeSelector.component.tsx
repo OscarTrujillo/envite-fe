@@ -3,11 +3,12 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { selectPlayerNumber } from "../../../../redux/actions/planner.actions";
 import { Dispatch, AnyAction } from "redux";
-import { RadioGroup, FormControlLabel, Radio, FormControl } from "@material-ui/core";
+import { RadioGroup, FormControlLabel, Radio, FormControl, FormLabel } from "@material-ui/core";
+import { TtableSizeOptions } from "../../../../entities/game.entity";
 
 function mapDispatchToProps(dispatch: Dispatch<AnyAction>) {
   return {
-    selectPlayerNumber: (number: 4|6|8) => dispatch(selectPlayerNumber(number))
+    selectPlayerNumber: (number: TtableSizeOptions) => dispatch(selectPlayerNumber(number))
   };
 }
 
@@ -26,16 +27,17 @@ class ConnectedTableSizeSelector extends Component<TtableSizeProps, {}> {
     this.handleChange = this.handleChange.bind(this);
   }
   handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-    this.props.selectPlayerNumber(+event.target.value as 4|6|8);
+    this.props.selectPlayerNumber(+event.target.value as TtableSizeOptions);
   }
   render() {
     const {tableSize} = this.props;
     return (
       <FormControl component="fieldset">
-        <RadioGroup aria-label="size" name="size" value={String(tableSize)} onChange={this.handleChange}>
-          <FormControlLabel value="4" control={<Radio />} label="4" />
-          <FormControlLabel value="6" control={<Radio />} label="6" />
-          <FormControlLabel value="8" control={<Radio />} label="8" />
+        <FormLabel component="legend">Size</FormLabel>
+        <RadioGroup row aria-label="size" name="size" value={String(tableSize)} onChange={this.handleChange}>
+          <FormControlLabel labelPlacement="bottom" value="4" control={<Radio />} label="4" />
+          <FormControlLabel labelPlacement="bottom" value="6" control={<Radio />} label="6" />
+          <FormControlLabel labelPlacement="bottom" value="8" control={<Radio />} label="8" />
         </RadioGroup>
       </FormControl>
     );

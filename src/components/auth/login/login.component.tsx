@@ -9,10 +9,10 @@ import Button from "@material-ui/core/Button";
 import { connect } from 'react-redux';
 import { AnyAction } from 'redux';
 import { ThunkDispatch } from "redux-thunk";
-import { History } from 'history';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import { login, IAuthInput } from '../../../redux/actions/auth.actions';
 import { IAppState } from '../../../redux/reducers/base.reducer';
+import { history } from '../../../redux/store/base.store';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -47,13 +47,9 @@ interface FormValues {
 //   // title?: string;
 // }
 
-interface ILoginProps {
-  history: History;
-}
-
-const Form = (props: ILoginProps & FormikProps<FormValues>) => {
+const Form = (props: FormikProps<FormValues>) => {
   const classes = useStyles();
-  const onclickRegister = () => props.history.push('/auth/signup');
+  const onclickRegister = () => history.push('/auth/signup');
   const {
     values,
     errors,
@@ -61,6 +57,7 @@ const Form = (props: ILoginProps & FormikProps<FormValues>) => {
     handleChange,
     handleBlur,
     handleSubmit,
+    // TODO: HANDLE THIS
     isSubmitting,
     // title
   } = props;
@@ -132,7 +129,7 @@ function actionCreator(dispatch: ThunkDispatch<any, any, AnyAction>) {
   };
 }
 
-const formikLogin = withFormik<ILoginProps & ReturnType<typeof actionCreator>, FormValues>({
+const formikLogin = withFormik<ReturnType<typeof actionCreator>, FormValues>({
   mapPropsToValues: props => ({
     username: "",
     password: "",
