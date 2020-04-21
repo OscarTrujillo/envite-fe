@@ -2,7 +2,7 @@ import { createBrowserHistory } from 'history'
 import { applyMiddleware, compose, createStore } from 'redux'
 import { routerMiddleware } from 'connected-react-router'
 import rootReducer from '../reducers/base.reducer'
-import socketMiddleware from '../middlewares/socket.middleware';
+// import socketMiddleware from '../middlewares/socket.middleware';
 import thunk from "redux-thunk";
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
@@ -26,7 +26,7 @@ function configureStore(preloadedState?: any) {
       applyMiddleware(
         thunk,
         routerMiddleware(history),
-        socketMiddleware,
+        // socketMiddleware,
       ),
     ),
   )

@@ -7,7 +7,7 @@ export interface IGameState {
 }  
 const initialState = new GameEntity();
 
-export function gameSate(state = initialState, action: IGameAction) {
+export function gameState(state = initialState, action: IGameAction) {
     switch (action.type) {
       case gameConstants.GAME_CREATE_REQUEST:
       case gameConstants.GAME_GET_REQUEST:
@@ -21,6 +21,11 @@ export function gameSate(state = initialState, action: IGameAction) {
       case gameConstants.GAME_CREATE_FAILURE:
       case gameConstants.GAME_GET_FAILURE:
         return {};
+      case gameConstants.NEW_SEAT:
+        return {
+          ...state,
+          game: action.game,
+        };
       default:
         return state
     }

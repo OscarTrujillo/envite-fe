@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { selectPlayerNumber } from "../../../../redux/actions/planner.actions";
 import { Dispatch, AnyAction } from "redux";
-import { RadioGroup, FormControlLabel, Radio, FormControl } from "@material-ui/core";
+import { RadioGroup, FormControlLabel, Radio, FormControl, FormLabel } from "@material-ui/core";
 import { TtableSizeOptions } from "../../../../entities/game.entity";
 
 function mapDispatchToProps(dispatch: Dispatch<AnyAction>) {
@@ -33,10 +33,11 @@ class ConnectedTableSizeSelector extends Component<TtableSizeProps, {}> {
     const {tableSize} = this.props;
     return (
       <FormControl component="fieldset">
-        <RadioGroup aria-label="size" name="size" value={String(tableSize)} onChange={this.handleChange}>
-          <FormControlLabel value="4" control={<Radio />} label="4" />
-          <FormControlLabel value="6" control={<Radio />} label="6" />
-          <FormControlLabel value="8" control={<Radio />} label="8" />
+        <FormLabel component="legend">Size</FormLabel>
+        <RadioGroup row aria-label="size" name="size" value={String(tableSize)} onChange={this.handleChange}>
+          <FormControlLabel labelPlacement="bottom" value="4" control={<Radio />} label="4" />
+          <FormControlLabel labelPlacement="bottom" value="6" control={<Radio />} label="6" />
+          <FormControlLabel labelPlacement="bottom" value="8" control={<Radio />} label="8" />
         </RadioGroup>
       </FormControl>
     );

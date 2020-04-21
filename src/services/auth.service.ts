@@ -5,6 +5,7 @@ import { post } from './api.service';
 export const authService = {
     register,
     login,
+    logout,
 };
 
 function register(user: IAuthInput) {
@@ -15,3 +16,6 @@ function login(user: IAuthInput) {
     return post<UserEntity>('/auth/login', JSON.stringify(user), UserEntity);
 }
 
+function logout() {
+    return post('/auth/logout');
+}

@@ -14,11 +14,14 @@ export class GameEntity {
     @Expose({ name: "_id" })
     public id!: string;
 
-    @Expose({ name: "roundtime" })
+    @Expose()
     public roundTime!: TroundTimeOptions;
 
     @Expose()
     public numberOfPlayers!: TtableSizeOptions;
+
+    @Expose()
+    public table!: string[];
 
     // @Type(() => Player)
     // @Expose()

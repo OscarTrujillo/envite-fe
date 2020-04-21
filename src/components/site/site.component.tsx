@@ -6,6 +6,7 @@ import './site.component.scss';
 import Home from './home/home.component';
 import Planner from './planner/planner.componet';
 import { history } from '../../redux/store/base.store';
+import Board from './board/board.component';
 
 const SiteComponent = () => {
   return (
@@ -19,6 +20,9 @@ const SiteComponent = () => {
             </Route>
             <Route exact path="/site/planner">
               <Planner/>
+            </Route> 
+            <Route exact path="/site/board">
+              <Board/>
             </Route> 
             {/* default */}
             <Route>

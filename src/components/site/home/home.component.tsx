@@ -14,7 +14,7 @@ function homeActions(dispatch: ThunkDispatch<any, any, AnyAction>) {
   };
 }
 
-const ConnectedHome = ( props:  ReturnType<typeof homeActions> ) => {
+const ConnectedHome = ( props: ReturnType<typeof homeActions> ) => {
   let textFieldValue = ''
 
   const onclickPlanner = () => history.push('/site/planner');

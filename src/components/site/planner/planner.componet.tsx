@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from "react-redux";
 import { IPlannerReducer } from '../../../redux/reducers/planner.reducer';
 import TableSizeSelector from './tableSizeSelector/tableSizeSelector.component';
-import Table from './table/table.component';
 import { Grid, Button } from '@material-ui/core';
 import { ThunkDispatch } from "redux-thunk";
 import { AnyAction } from 'redux';
@@ -27,7 +26,7 @@ type TConnectedPlannerProps = ReturnType<typeof plannerActions> & ReturnType<typ
 
 const ConnectedSize = (props: TConnectedPlannerProps ) => {
   const onClickStartGame = () => {
-    props.startGame({ roundtime: props.roundTime, numberOfPlayers: props.tableSize  })
+    props.startGame({ roundTime: props.roundTime, numberOfPlayers: props.tableSize  })
   }
 
   return(
@@ -37,24 +36,25 @@ const ConnectedSize = (props: TConnectedPlannerProps ) => {
       </h1>
       <Grid container spacing={3}>
         <Grid item xs={2}>
-          <p>size</p>
-          <TableSizeSelector/>
-          <p>time</p>
-          <RoundTimeSelector/>
         </Grid>
-        <Grid item xs={10}>
-          <Table/>
+        <Grid item xs={8}>
+          <div>
+            <TableSizeSelector/>
+          </div>
+          <div>
+            <RoundTimeSelector/>
+          </div>
+          <div className="button-container">
+            <Button
+              variant="outlined"
+              type="submit"
+              onClick={onClickStartGame}
+              >
+              Crear partida
+            </Button>
+          </div>
         </Grid>
       </Grid>
-      <div className="button-container">
-        <Button
-          variant="outlined"
-          type="submit"
-          onClick={onClickStartGame}
-          >
-          Crear partida
-        </Button>
-      </div>
     </div>
   )
 };
