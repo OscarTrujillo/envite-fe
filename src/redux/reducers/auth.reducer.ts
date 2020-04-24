@@ -46,6 +46,7 @@ export function authentication(state = initialState, action: IAuthAction) {
     case authConstants.LOGIN_FAILURE:
       return {};
     case authConstants.LOGOUT_SUCCESS:
+    case authConstants.LOGOUT_FAILURE:
       return {
         ...state,
         loggedIn: false,

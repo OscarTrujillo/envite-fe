@@ -7,9 +7,10 @@ import { ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "redux";
 import { IGetGameInput, getGame } from '../../../redux/actions/game.actions';
 import { history } from "../../../redux/store/base.store";
-import { Paper, InputBase, Divider, IconButton, makeStyles, Theme, createStyles } from "@material-ui/core";
+import { Paper, InputBase, Divider, IconButton, makeStyles, Theme, createStyles, Button } from "@material-ui/core";
 import FilterNoneIcon from '@material-ui/icons/FilterNone';
 import CopyToClipboard from 'react-copy-to-clipboard';
+import ChatApp from "../../shared/chat/chat.component";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -60,7 +61,8 @@ const ConnectedBoard = (props: TBoardProps) => {
     const queryId = useQuery().get('id');
     const currenturl = window.location.href;
 
-    console.log(useLocation());
+    const onclickOut = () => history.push('/site');
+
     if (queryId) {
         if (props.game?.id !== queryId) {
             props.getGame({_id: queryId});
@@ -68,7 +70,13 @@ const ConnectedBoard = (props: TBoardProps) => {
         return (
             <div>
                 {props.game?.id === queryId ? 
-                    <div>    
+                    <div>  
+                        <Button
+                            variant="outlined"
+                            onClick={onclickOut}
+                            >
+                            Salir
+                        </Button>
                         <Table/>
                         <div className={classes.buttonContainer}>
                             <Paper component="form" className={classes.root}>
@@ -96,6 +104,7 @@ const ConnectedBoard = (props: TBoardProps) => {
                                 </CopyToClipboard>
                             </Paper>
                         </div>
+                        <ChatApp></ChatApp>
                     </div>
                     :
                     <p>waiting ...</p>

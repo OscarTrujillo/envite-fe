@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Card, CardContent, GridList, GridListTile, Grid } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
-import './table.scss';
 import { IAppState } from '../../../../redux/reducers/base.reducer';
 import { socket } from '../../../../socket/socket-client';
+import './table.component.scss';
 
 const tableProps = (state: IAppState) => {
 	return {
@@ -80,8 +80,8 @@ const ConnectedTable = (props: TtableProps ) => {
 			<Grid container spacing={2} >
 				<Grid item className="tableColumn">
 					<GridList cellHeight={80} cols={1} spacing={16}>
-						<GridListTile key='1' onClick={() => onclickSeat(0)}>
-							<Card className="readTeamInvited" variant="outlined">
+						<GridListTile key='0' onClick={() => onclickSeat(0)}>
+							<Card className="readTeam" variant="outlined">
 								<CardContent>
 									{seatUsedBy(0) ? 
 										seatUsedBy(0)
@@ -91,8 +91,8 @@ const ConnectedTable = (props: TtableProps ) => {
 								</CardContent>
 							</Card>
 						</GridListTile>
-						<GridListTile key='4' onClick={() => onclickSeat(7)}>
-							<Card className={props.game.numberOfPlayers > 4 ? 'blueTeamInvited' : 'disabledCard'} variant="outlined">
+						<GridListTile key='7' onClick={() => onclickSeat(7)}>
+							<Card className={props.game.numberOfPlayers > 4 ? 'blueTeam' : 'disabledCard'} variant="outlined">
 								<CardContent>
 									{seatUsedBy(7) ? 
 										seatUsedBy(7)
@@ -103,7 +103,7 @@ const ConnectedTable = (props: TtableProps ) => {
 							</Card>
 						</GridListTile>
 						<GridListTile key='6' onClick={() => onclickSeat(6)}>
-							<Card className={props.game.numberOfPlayers > 6 ? 'readTeamInvited' : 'disabledCard'} variant="outlined">
+							<Card className={props.game.numberOfPlayers > 6 ? 'readTeam' : 'disabledCard'} variant="outlined">
 								<CardContent>
 									{seatUsedBy(6) ? 
 										seatUsedBy(6)
@@ -117,8 +117,8 @@ const ConnectedTable = (props: TtableProps ) => {
 				</Grid>
 				<Grid item className="tableColumn">
 					<GridList cellHeight={80} cols={1} spacing={16}>
-						<GridListTile key='userGrid' className="gridListUserName" onClick={() => onclickSeat(1)}>
-							<Card className="userCard" variant="outlined">
+						<GridListTile key='1' onClick={() => onclickSeat(1)}>
+							<Card className="blueTeam" variant="outlined">
 								<CardContent>
 									{seatUsedBy(1) ? 
 										seatUsedBy(1)
@@ -134,8 +134,8 @@ const ConnectedTable = (props: TtableProps ) => {
 								</CardContent>
 							</Card>
 						</GridListTile>
-						<GridListTile key='3' onClick={() => onclickSeat(5)}>
-							<Card className={props.game.numberOfPlayers === 6 ? 'readTeamInvited' : 'blueTeamInvited'} variant="outlined">
+						<GridListTile key='5' onClick={() => onclickSeat(5)}>
+							<Card className={props.game.numberOfPlayers === 6 ? 'readTeam' : 'blueTeam'} variant="outlined">
 								<CardContent>
 									{seatUsedBy(5) ? 
 										seatUsedBy(5)
@@ -150,7 +150,7 @@ const ConnectedTable = (props: TtableProps ) => {
 				<Grid item className="tableColumn">
 					<GridList cellHeight={80} cols={1} spacing={16}>
 						<GridListTile key='2' onClick={() => onclickSeat(2)}>
-							<Card className="readTeamInvited" variant="outlined">
+							<Card className="readTeam" variant="outlined">
 								<CardContent>
 									{seatUsedBy(2) ? 
 										seatUsedBy(2)
@@ -160,8 +160,8 @@ const ConnectedTable = (props: TtableProps ) => {
 								</CardContent>
 							</Card>
 						</GridListTile>
-						<GridListTile key='5' onClick={() => onclickSeat(3)}>
-							<Card className={props.game.numberOfPlayers > 4 ? 'blueTeamInvited' : 'disabledCard'} variant="outlined">
+						<GridListTile key='3' onClick={() => onclickSeat(3)}>
+							<Card className={props.game.numberOfPlayers > 4 ? 'blueTeam' : 'disabledCard'} variant="outlined">
 								<CardContent>
 									{seatUsedBy(3) ? 
 										seatUsedBy(3)
@@ -171,8 +171,8 @@ const ConnectedTable = (props: TtableProps ) => {
 								</CardContent>
 							</Card>
 						</GridListTile>
-						<GridListTile key='7' onClick={() => onclickSeat(4)}>
-							<Card className={props.game.numberOfPlayers > 6 ? 'readTeamInvited' : 'disabledCard'} variant="outlined">
+						<GridListTile key='4' onClick={() => onclickSeat(4)}>
+							<Card className={props.game.numberOfPlayers > 6 ? 'readTeam' : 'disabledCard'} variant="outlined">
 								<CardContent>
 									{seatUsedBy(4) ? 
 										seatUsedBy(4)
