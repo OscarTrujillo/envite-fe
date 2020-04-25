@@ -63,6 +63,10 @@ const ConnectedBoard = (props: TBoardProps) => {
 
     const onclickOut = () => history.push('/site');
 
+    const initGame = () => {
+        console.log('init game');
+    }
+
     if (queryId) {
         if (props.game?.id !== queryId) {
             props.getGame({_id: queryId});
@@ -103,6 +107,14 @@ const ConnectedBoard = (props: TBoardProps) => {
                                     </IconButton>
                                 </CopyToClipboard>
                             </Paper>
+                        </div>
+                        <div className="button-container">
+                            <Button
+                            variant="outlined"
+                            onClick={initGame}
+                            >
+                            Iniciar partida
+                            </Button>
                         </div>
                         <ChatApp></ChatApp>
                     </div>
