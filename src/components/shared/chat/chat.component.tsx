@@ -20,10 +20,6 @@ const chatAppProps = (state: IAppState) => {
 type TchatAppProps = ReturnType<typeof chatAppProps>;
 
 export class ChatAppComponent extends Component<TchatAppProps> {
-    constructor(props: TchatAppProps) {
-        super(props);
-    }
-
     state = {
         inputValue: '',
         chatOpen: false,

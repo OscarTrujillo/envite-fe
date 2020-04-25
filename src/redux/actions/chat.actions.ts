@@ -1,6 +1,5 @@
 import { chatConstants } from './../store/constants.store';
 import { ChatMessageEntity } from './../../entities/chat-message.entity';
-import { useLocation } from 'react-router';
 
 export interface IChatAction {
     type: string;
