@@ -78,8 +78,8 @@ class Socket {
         console.log('disconnect', reason);
     }
 
-    onChatMessage = (msg: string) => {
-        store.dispatch(newChatMessage(msg));
+    onChatMessage = (msg: string, userName: string) => {
+        store.dispatch(newChatMessage(msg, userName));
     }
 }
 

@@ -4,7 +4,7 @@ export class ChatMessageEntity {
 
     // todo: username 
     @Expose()
-    public name!: string;
+    public userName!: string;
 
     @Expose()
     public message!: string;

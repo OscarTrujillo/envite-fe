@@ -12,9 +12,10 @@ export const addMessageAction = (message: ChatMessageEntity): IChatAction => ({
   });
 
 
-export function newChatMessage(msg: string): IChatAction {
+export function newChatMessage(msg: string, userName: string): IChatAction {
     const message = new ChatMessageEntity();
     message.message = msg;
+    message.userName = userName;
     return { 
       type: chatConstants.CHAT_NEW_MESSAGE, message
     };

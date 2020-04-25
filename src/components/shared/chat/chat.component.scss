@@ -144,7 +144,7 @@ $color2: #0AD5C1;
                     border-top: $chat-thread-msg-arrow-size solid $chat-thread-bgd-color;
                 }
             }
-            li.other {
+            li.self {
                 animation: show-chat-odd 0.15s 1 ease-in;
                 -moz-animation: show-chat-odd 0.15s 1 ease-in;
                 -webkit-animation: show-chat-odd 0.15s 1 ease-in;
@@ -152,16 +152,16 @@ $color2: #0AD5C1;
                 margin-right: $chat-thread-offset;
                 color: $color2;
             }
-            li.other:before {
+            li.self:before {
                 right: -$chat-thread-offset;
                 // Placeholder avatar 1
                 background-image: url(https://github.com/Thatkookooguy.png);
             }
-            li.other:after {
+            li.self:after {
                 border-right: $chat-thread-msg-arrow-size solid transparent;
                 right: -$chat-thread-msg-arrow-size;
             }
-            li.self {
+            li.other {
                 animation: show-chat-even 0.15s 1 ease-in;
                 -moz-animation: show-chat-even 0.15s 1 ease-in;
                 -webkit-animation: show-chat-even 0.15s 1 ease-in;
@@ -169,12 +169,12 @@ $color2: #0AD5C1;
                 margin-left: $chat-thread-offset;
                 color: $color1;
             }
-            li.self:before {
+            li.other:before {
                 left: -$chat-thread-offset;
                 // Placeholder avatar 2
                 background-image: url(https://github.com/ortichon.png);
             }
-            li.self:after {
+            li.other:after {
                 border-left: $chat-thread-msg-arrow-size solid transparent;
                 left: -$chat-thread-msg-arrow-size;
             }

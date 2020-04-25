@@ -86,7 +86,7 @@ export class ChatAppComponent extends Component<TchatAppProps> {
                     <ul className="messages">
                         {messages.map((msg, i) => 
                         <li 
-                        className={`${authUser.id === msg.name ? "slef" : "other"}`}
+                        className={`${authUser.username === msg.userName ? "self" : "other"}`}
                         key={i}>{msg.message}</li>)}
                     </ul>
                     <div className="footer">
