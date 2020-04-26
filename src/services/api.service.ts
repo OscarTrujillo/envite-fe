@@ -1,4 +1,8 @@
+import { ThunkDispatch } from 'redux-thunk';
 import { plainToClass } from 'class-transformer';
+import { store } from '../redux/store/base.store';
+import { logout } from '../redux/actions/auth.actions';
+import { AnyAction } from 'redux';
 
 function requestOptions(method: string): RequestInit {
     return {
@@ -52,6 +56,10 @@ function handleResponse<T>(response: Response) {
     }
     if (response.status === 204) {
         return response.text();
+    }
+
+    if (response.status === 401) {
+        (store.dispatch as ThunkDispatch<any, any, AnyAction>)(logout());
     }
 
     return response.json();
