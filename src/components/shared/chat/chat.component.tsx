@@ -62,7 +62,7 @@ export class ChatAppComponent extends Component<TchatAppProps> {
             })}
             >
                 <IconButton
-                     className={classNames({
+                    className={classNames({
                         hide: this.state.chatOpen,
                     })}
                     onClick={this.openChat} color="primary" aria-label="directions">
@@ -85,9 +85,16 @@ export class ChatAppComponent extends Component<TchatAppProps> {
                     </div>
                     <ul className="messages">
                         {messages.map((msg, i) => 
-                        <li 
-                        className={`${authUser.username === msg.userName ? "self" : "other"}`}
-                        key={i}>{msg.message}</li>)}
+                        <li key={i}
+                        className={classNames({
+                            self: authUser.username === msg.userName,
+                            other: authUser.username !== msg.userName,
+                            marginTop: i !== 0 && msg.userName !== authUser.username && msg.userName !== messages[i-1]?.userName && messages[i-1]?.userName !== authUser.username,
+                            userNameNotVisible: msg.userName === messages[i-1]?.userName
+                        })}>
+                            <span className="username">{msg.userName}</span>
+                            <span className="message">{msg.message}</span>
+                        </li>)}
                     </ul>
                     <div className="footer">
                         <form className="chat-input fullWidth" onSubmit={this.sendHandler}>
