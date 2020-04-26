@@ -56,6 +56,7 @@ export const logout = (): AppThunk => async dispatch =>{
         },
         error => {
             dispatch(failure(error.toString()));
+            history.push('/');
         }
     );
     function success(): IAuthAction { return { type: authConstants.LOGOUT_SUCCESS } }

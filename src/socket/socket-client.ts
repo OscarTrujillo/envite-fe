@@ -4,23 +4,40 @@ import { plainToClass } from 'class-transformer';
 import io from 'socket.io-client';
 import { newSeat } from '../redux/actions/game.actions';
 import { store } from '../redux/store/base.store';
+import { newChatMessage } from '../redux/actions/chat.actions';
 
 // Socket manager
 class Socket {
     
     private socket = io.Socket;
 
+    // Helper to emit a redux action to our websocket server
+    emitAction = (actionCreator: any) => {
+        return (...args: any) => {
+            // This return the action object which gets sent to our backend
+            // server via the socket connection
+            const result = actionCreator.apply(this, args)
+            this.socket.emit(result.key, {
+                ...result.payload,
+                type: result.type
+            })
+            return result
+        }
+    }
+
     connect = () => {
         // Connect
-        const host = process.env.REACT_APP_API_URL as string;
-        this.socket = io.connect(host);
-
-        // Set listeners
-        this.socket.on('connect', this.onConnected);
-        this.socket.on('unauthorized', this.onUnauthorized);
-        this.socket.on('disconnect', this.onDisconnect);
-        this.socket.on('chat message', this.onChatMessage);
-        this.socket.on('new-player-seated', this.onNewPlayer);
+        if(!this.socket?.connected) {
+            const host = process.env.REACT_APP_API_URL as string;
+            this.socket = io.connect(host);
+            
+            // Set listeners
+            this.socket.on('connect', this.onConnected);
+            this.socket.on('unauthorized', this.onUnauthorized);
+            this.socket.on('disconnect', this.onDisconnect);
+            this.socket.on('chat message', this.onChatMessage);
+            this.socket.on('new-player-seated', this.onNewPlayer);
+        }
     };
 
     disconnect = () => {
@@ -28,7 +45,11 @@ class Socket {
     }
 
     sendSeat = (seat: number) => {
-        this.socket?.emit('new-seat', seat, (success: any) => console.log(success));
+        this.socket?.emit('new-seat', seat, (success: any) => console.log('seat success', success));
+    }
+
+    sendChatMessage = (message: string) => {
+        this.socket?.emit('chat message', message, (success: any) => console.log('message', success));
     }
 
     onNewPlayer = (game: any) => {
@@ -57,8 +78,8 @@ class Socket {
         console.log('disconnect', reason);
     }
 
-    onChatMessage = (msg: string) => {
-        console.log('chatMessage', msg);
+    onChatMessage = (msg: string, userName: string) => {
+        store.dispatch(newChatMessage(msg, userName));
     }
 }
 

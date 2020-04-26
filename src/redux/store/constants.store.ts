@@ -12,12 +12,10 @@ export const authConstants = {
 
 };
 
-
 export const plannerConstants = {
     SELECT_PLAYER_NUMBER: 'SELECT_PLAYER_NUMBER',
     SELECT_ROUND_TIME: 'SELECT_ROUND_TIME',
 };
-
 
 export const gameConstants = {
     GAME_CREATE_REQUEST: 'GAME_CREATE_REQUEST',
@@ -29,4 +27,8 @@ export const gameConstants = {
     GAME_GET_FAILURE: 'GAME_GET_FAILURE',
 
     NEW_SEAT: 'NEW_SEAT',
+};
+
+export const chatConstants = {
+    CHAT_NEW_MESSAGE: 'CHAT_NEW_MESSAGE',
 };

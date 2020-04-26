@@ -1,4 +1,4 @@
-import { TroundTimeOptions } from './../../entities/game.entity';
+import { TroundTimeOptions } from '../../entities/game.entity';
 import { plannerConstants } from './../store/constants.store';
 import { TtableSizeOptions } from '../../entities/game.entity';
 
