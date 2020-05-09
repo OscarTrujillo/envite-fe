@@ -1,5 +1,6 @@
-import { Expose } from 'class-transformer';
-
+import { UserEntity } from './user.entity';
+import { Expose, Type } from 'class-transformer';
+import "reflect-metadata";
 
 // export class PlayerArray extends Array<Player> {
 //     // custom array functions ...
@@ -20,8 +21,9 @@ export class GameEntity {
     @Expose()
     public numberOfPlayers!: TtableSizeOptions;
 
+    @Type(() => UserEntity)
     @Expose()
-    public table!: string[];
+    public table!: UserEntity[];
 
     // @Type(() => Player)
     // @Expose()

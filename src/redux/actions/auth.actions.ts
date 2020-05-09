@@ -47,7 +47,7 @@ export const login = (authInput: IAuthInput): AppThunk => async dispatch => {
 };  
 
 
-export const logout = (): AppThunk => async dispatch =>{
+export const logout = (): AppThunk => async dispatch => {
     return authService.logout()
     .then(
         response => { 
@@ -63,3 +63,11 @@ export const logout = (): AppThunk => async dispatch =>{
     function failure(error?: string): IAuthAction { return { type: authConstants.LOGOUT_FAILURE, error } }
 
 }
+
+export function feLogout(): IAuthAction {
+    history.push('/site');
+    return { 
+      type: authConstants.LOGOUT_SUCCESS
+    };
+  }
+  

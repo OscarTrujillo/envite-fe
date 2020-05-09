@@ -1,0 +1,95 @@
+.game {
+    height: 100%;
+    .gameHeader {
+        height: 4rem;
+    }
+    .gameBody {
+        height: calc(100% - 4rem);
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        .myCards {
+            position: relative;
+            .avatar {
+                position: absolute;
+                left: 3rem;
+                .options {
+                    &.hide {
+                        display: none !important;
+                    }
+                    // z-index: -1;
+                    animation: show-animation 0.15s 1 ease-in;
+                    position: absolute;
+                    top: -4rem;
+                    left: -2rem;
+                    width: max-content;
+                    .withMargin {
+                        margin-top: 2rem;
+                    }
+                }
+                img{
+                    cursor: pointer;
+                    width: 5rem;
+                    height: 5rem;
+                    border-radius: 5rem;
+                }
+            }
+            .cards {
+                height: 13rem;
+                display: flex;
+                img {
+                    height: 12rem;
+                    cursor: pointer;
+                    align-self: flex-end;
+                    border-radius: 9px;
+
+                    &:hover {
+                        height: 13rem;
+                    }
+                }
+            }
+        }
+
+        .myCards {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+    }
+
+}
+
+// Animation
+// --------------------------------------
+@keyframes show-animation {
+    0% {
+        margin-top: 2rem;
+        z-index: -1;
+    }
+    100% {
+        z-index: 0;
+        margin-top: 0;
+    }
+}
+
+@-moz-keyframes show-animation {
+    0% {
+        margin-top: 2rem;
+        z-index: -1;
+    }
+    100% {
+        z-index: 0;
+        margin-top: 0;
+    }
+}
+
+@-webkit-keyframes show-animation {
+    0% {
+        margin-top: 2rem;
+        z-index: -1;
+    }
+    100% {
+        z-index: 0;
+        margin-top: 0;
+    }
+}

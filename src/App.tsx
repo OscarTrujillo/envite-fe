@@ -21,8 +21,8 @@ export default class App extends Component<{}, AppState> {
     this.state = { rehydrated: false }
   }
 
-  // TODO: componentDidMount?
-  componentWillMount(){
+  // TODO: componentWillMount?
+  componentDidMount(){
     persistor.subscribe( () => {
       this.setState({ rehydrated: true })
     })

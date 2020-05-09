@@ -13,6 +13,7 @@ export interface IGameAction {
 
 export interface IGameInput { roundTime: string, numberOfPlayers: TtableSizeOptions }
 
+// create game
 export const startGame = (gameInput: IGameInput): AppThunk => async dispatch => {
     return gameService.startGame(gameInput)
         .then(

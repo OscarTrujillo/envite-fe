@@ -37,6 +37,7 @@ class Socket {
             this.socket.on('disconnect', this.onDisconnect);
             this.socket.on('chat message', this.onChatMessage);
             this.socket.on('new-player-seated', this.onNewPlayer);
+            this.socket.on('start-game', this.onInitGame);
         }
     };
 
@@ -52,21 +53,30 @@ class Socket {
         this.socket?.emit('chat message', message, (success: any) => console.log('message', success));
     }
 
+    initGame = () => {
+        this.socket?.emit('start-game', null, (success: any) => console.log('init game1', success));
+    }
+
+    emitAuthentication = (userId: string, gameId: string) => {
+        this.socket?.emit('authentication', {
+            _id: userId,
+            gameId: gameId
+        });
+    }
+
     onNewPlayer = (game: any) => {
         const g = plainToClass(GameEntity, game, { excludeExtraneousValues: true })
         console.log('new seat', g);
         store.dispatch(newSeat(g));
     }
 
-    // Received connect event from socket
+    // Received events from socket
+    // ----------------------------------
     onConnected = () => {
         const state = store.getState() as IAppState;
         console.log('connected', state.gameState.game.id, state.authentication.user.id);
 
-        this.socket.emit('authentication', {
-            _id: state.authentication.user.id,
-            gameId: state.gameState.game.id,
-        });
+        this.emitAuthentication(state.authentication.user.id, state.gameState.game.id)
     };
 
     onUnauthorized = (reason: any) => {
@@ -80,6 +90,10 @@ class Socket {
 
     onChatMessage = (msg: string, userName: string) => {
         store.dispatch(newChatMessage(msg, userName));
+    }
+
+    onInitGame = (reason: any) => {
+        console.log('onInitGame', reason);
     }
 }
 

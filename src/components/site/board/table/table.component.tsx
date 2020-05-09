@@ -69,7 +69,7 @@ const ConnectedTable = (props: TtableProps ) => {
 	const seatUsedBy = (position: number) => {
 		const pos = seatTransformer(position);
 		if (pos !== undefined && props.game.table && props.game.table[pos]) {
-			return props.game.table[pos];
+			return props.game.table[pos].nickName;
 		}
 		return undefined;
 	}

@@ -11,6 +11,7 @@ import { Paper, InputBase, Divider, IconButton, makeStyles, Theme, createStyles,
 import FilterNoneIcon from '@material-ui/icons/FilterNone';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import ChatApp from "../../shared/chat/chat.component";
+import { socket } from "../../../socket/socket-client";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -47,7 +48,7 @@ function boardActions(dispatch: ThunkDispatch<any, any, AnyAction>) {
     return {
       getGame: (game: IGetGameInput) => dispatch(getGame(game))
     };
-  }
+}
   
 
 type TBoardProps = ReturnType<typeof boardProps> & ReturnType<typeof boardActions> ;
@@ -65,6 +66,9 @@ const ConnectedBoard = (props: TBoardProps) => {
 
     const initGame = () => {
         console.log('init game');
+        socket.initGame();
+        // TODO: remove this
+        history.push('/site/game');
     }
 
     if (queryId) {
