@@ -76,7 +76,7 @@ const ConnectedTable = (props: TtableProps ) => {
 
 	return (
 		<div className="table">
-			<p>Sellecciona posicion en la mesa {props.user.username}</p>
+			<p>Selecciona posicion en la mesa {props.user.username}</p>
 			<Grid container spacing={2} >
 				<Grid item className="tableColumn">
 					<GridList cellHeight={80} cols={1} spacing={16}>

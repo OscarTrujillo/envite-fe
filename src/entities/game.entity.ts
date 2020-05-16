@@ -7,6 +7,8 @@ import "reflect-metadata";
 // }
 
 export type TroundTimeOptions = '30s' | '60s' | '90s' | '180s' | 'no-limit';
+// Running, waitingForPlayers, Ready
+export type TgameStatus = 'Running' | 'waitingForPlayers' | 'Ready';
 
 export type TtableSizeOptions = 4 | 6 | 8;
 
@@ -24,6 +26,15 @@ export class GameEntity {
     @Type(() => UserEntity)
     @Expose()
     public table!: UserEntity[];
+
+    @Expose()
+    public gameStatus!: TgameStatus;
+
+    @Expose()
+    public createdBy!: string;
+
+    @Expose()
+    public gamesToWin!: number;
 
     // @Type(() => Player)
     // @Expose()

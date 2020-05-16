@@ -1,10 +1,12 @@
+import { cardEntity } from './../entities/card.entity';
 import { IAppState } from './../redux/reducers/base.reducer';
 import { GameEntity } from './../entities/game.entity';
 import { plainToClass } from 'class-transformer';
 import io from 'socket.io-client';
-import { newSeat } from '../redux/actions/game.actions';
+import { gameDataChange } from '../redux/actions/game.actions';
 import { store } from '../redux/store/base.store';
 import { newChatMessage } from '../redux/actions/chat.actions';
+import { myCardsChange } from '../redux/actions/hand.actions';
 
 // Socket manager
 class Socket {
@@ -36,8 +38,11 @@ class Socket {
             this.socket.on('unauthorized', this.onUnauthorized);
             this.socket.on('disconnect', this.onDisconnect);
             this.socket.on('chat message', this.onChatMessage);
-            this.socket.on('new-player-seated', this.onNewPlayer);
+            this.socket.on('send-game-data', this.onGameDataChange);
             this.socket.on('start-game', this.onInitGame);
+
+            this.socket.on('new-hand', this.onNewHand);
+
         }
     };
 
@@ -54,7 +59,7 @@ class Socket {
     }
 
     initGame = () => {
-        this.socket?.emit('start-game', null, (success: any) => console.log('init game1', success));
+        this.socket?.emit('start-game', (success: any) => console.log('init game1', success));
     }
 
     emitAuthentication = (userId: string, gameId: string) => {
@@ -64,10 +69,10 @@ class Socket {
         });
     }
 
-    onNewPlayer = (game: any) => {
+    onGameDataChange = (game: any) => {
         const g = plainToClass(GameEntity, game, { excludeExtraneousValues: true })
-        console.log('new seat', g);
-        store.dispatch(newSeat(g));
+        console.log('on GameDataChange', g);
+        store.dispatch(gameDataChange(g));
     }
 
     // Received events from socket
@@ -94,6 +99,11 @@ class Socket {
 
     onInitGame = (reason: any) => {
         console.log('onInitGame', reason);
+    }
+
+    onNewHand = ( hand: cardEntity[] ) => {
+      console.log('Nueva Mano: ', hand) 
+      store.dispatch(myCardsChange(hand));
     }
 }
 
