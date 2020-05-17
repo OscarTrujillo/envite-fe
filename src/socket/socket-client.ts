@@ -79,7 +79,7 @@ class Socket {
     // ----------------------------------
     onConnected = () => {
         const state = store.getState() as IAppState;
-        console.log('connected', state.gameState.game.id, state.authentication.user.id);
+        console.log('connected', state.gameState?.game?.id, state.authentication?.user?.id);
 
         this.emitAuthentication(state.authentication.user.id, state.gameState.game.id)
     };
