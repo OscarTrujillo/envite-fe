@@ -113,6 +113,7 @@
                     cursor: pointer;
                     align-self: flex-end;
                     border-radius: 9px;
+                    image-rendering: -webkit-optimize-contrast;
 
                     &:hover {
                         height: 13rem;
@@ -120,7 +121,7 @@
                 }
             }
         }
-
+        
         .myCards {
             display: flex;
             justify-content: center;
