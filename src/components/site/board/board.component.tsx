@@ -11,6 +11,7 @@ import { Paper, InputBase, Divider, IconButton, makeStyles, Theme, createStyles,
 import FilterNoneIcon from '@material-ui/icons/FilterNone';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import ChatApp from "../../shared/chat/chat.component";
+import { socket } from "../../../socket/socket-client";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -39,7 +40,10 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const boardProps = (state: IAppState) => {
-    return { game: state.gameState.game }
+    return { 
+        game: state.gameState.game,
+        user: state.authentication.user 
+    }
 }
 
 // TODO: improve ThunkDispatch<any, any, AnyAction
@@ -47,7 +51,7 @@ function boardActions(dispatch: ThunkDispatch<any, any, AnyAction>) {
     return {
       getGame: (game: IGetGameInput) => dispatch(getGame(game))
     };
-  }
+}
   
 
 type TBoardProps = ReturnType<typeof boardProps> & ReturnType<typeof boardActions> ;
@@ -64,12 +68,18 @@ const ConnectedBoard = (props: TBoardProps) => {
     const onclickOut = () => history.push('/site');
 
     const initGame = () => {
-        console.log('init game');
+        socket.initGame();
     }
 
     if (queryId) {
+
         if (props.game?.id !== queryId) {
             props.getGame({_id: queryId});
+        } 
+        else {
+            if (props.game.gameStatus === 'Running') {
+                history.push('/site/game?id=' + queryId);
+            }
         }
         return (
             <div>
@@ -108,14 +118,17 @@ const ConnectedBoard = (props: TBoardProps) => {
                                 </CopyToClipboard>
                             </Paper>
                         </div>
-                        <div className="button-container">
-                            <Button
-                            variant="outlined"
-                            onClick={initGame}
-                            >
-                            Iniciar partida
-                            </Button>
-                        </div>
+                        { props.game.createdBy === props.user.id && 
+                            <div className="button-container">
+                                <Button
+                                disabled={props.game?.gameStatus !== 'Ready'}
+                                variant="outlined"
+                                onClick={initGame}
+                                >
+                                Iniciar partida
+                                </Button>
+                            </div>
+                        }
                         <ChatApp></ChatApp>
                     </div>
                     :
@@ -127,6 +140,7 @@ const ConnectedBoard = (props: TBoardProps) => {
     } else {
         history.push('/site');
     }
+    // TDODO: not found page?
     return(
         <div>
             Not found

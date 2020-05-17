@@ -13,6 +13,7 @@ export interface IGameAction {
 
 export interface IGameInput { roundTime: string, numberOfPlayers: TtableSizeOptions }
 
+// create game
 export const startGame = (gameInput: IGameInput): AppThunk => async dispatch => {
     return gameService.startGame(gameInput)
         .then(
@@ -20,7 +21,6 @@ export const startGame = (gameInput: IGameInput): AppThunk => async dispatch => 
                 dispatch(success(game));
                 socket.connect();
                 history.push('/site/board?id=' + game.id);
-
             },
             error => {
                 dispatch(failure(error.toString()));
@@ -42,7 +42,9 @@ export const getGame = (getGameInput: IGetGameInput): AppThunk => async dispatch
             game => { 
                 socket.connect();
                 dispatch(success(game));
-                history.push('/site/board?id=' + game.id);
+                if (window.location.pathname !== '/site/game' && window.location.pathname !== '/site/board') {
+                    history.push('/site/board?id=' + game.id);
+                }
             },
             error => {
                 dispatch(failure(error.toString()));
@@ -56,7 +58,7 @@ export const getGame = (getGameInput: IGetGameInput): AppThunk => async dispatch
 };  
 
 
-export function newSeat(game: GameEntity): IGameAction {
+export function gameDataChange(game: GameEntity): IGameAction {
     return { 
       type: gameConstants.NEW_SEAT, game: game
     };

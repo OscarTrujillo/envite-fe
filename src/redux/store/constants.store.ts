@@ -32,3 +32,7 @@ export const gameConstants = {
 export const chatConstants = {
     CHAT_NEW_MESSAGE: 'CHAT_NEW_MESSAGE',
 };
+
+export const handConstants = {
+    MY_CARDS_CHANGE: 'MY_CARDS_CHANGE',
+};

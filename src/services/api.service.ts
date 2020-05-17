@@ -1,4 +1,6 @@
 import { plainToClass } from 'class-transformer';
+import { store } from '../redux/store/base.store';
+import { feLogout } from '../redux/actions/auth.actions';
 
 function requestOptions(method: string): RequestInit {
     return {
@@ -48,6 +50,10 @@ function apiRequest<T>(options: RequestInit, endpoint: string, responseType?: IE
 // // TODO: check errors
 function handleResponse<T>(response: Response) {
     if (!response.ok) {
+        if (response.status === 401) {
+            // (store.dispatch as ThunkDispatch<any, any, AnyAction>)(logout());
+            store.dispatch(feLogout());
+        }
         throw Error(response.statusText);
     }
     if (response.status === 204) {

@@ -12,9 +12,9 @@ export const history = createBrowserHistory()
 function configureStore(preloadedState?: any) {
 
   const persistConfig = {
-    key: 'authentication',
+    key: 'root',
     storage: storage,
-    whitelist: ['authentication'] // which reducer want to store
+    whitelist: ['authentication', 'handState'] // which reducer want to store
   };
   const pReducer = persistReducer(persistConfig, rootReducer(history));
 

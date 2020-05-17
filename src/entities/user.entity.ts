@@ -8,4 +8,7 @@ export class UserEntity {
     @Expose()
     public username!: string;
 
+    @Expose({ name: "nickname" })
+    public nickName!: string;
+
 }

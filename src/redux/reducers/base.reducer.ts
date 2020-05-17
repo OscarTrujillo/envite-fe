@@ -1,3 +1,4 @@
+import { IHandState, handState } from './hand.reducers';
 import { IChatState, chatState } from './chat.reducer';
 import { IGameState, gameState } from './game.reducer';
 import planner, { IPlannerState } from './planner.reducer';
@@ -12,6 +13,7 @@ export interface IAppState {
     planner: IPlannerState;
     gameState: IGameState;
     chatState: IChatState;
+    handState: IHandState;
 }
 
   
@@ -21,7 +23,8 @@ const rootReducer = (history: History) =>  combineReducers({
     authentication,
     planner,
     gameState,
-    chatState
+    chatState,
+    handState
 });
 
 // export interface State {

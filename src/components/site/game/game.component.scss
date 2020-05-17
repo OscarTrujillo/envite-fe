@@ -1,0 +1,167 @@
+@keyframes timer {
+    0% { --timer: 20; }
+    5% { --timer: 19; }
+    10% { --timer: 18; }
+    15% { --timer: 17; }
+    20% { --timer: 16; }
+    25% { --timer: 15; }
+    30% { --timer: 14; }
+    35% { --timer: 13; }
+    40% { --timer: 12; }
+    45% { --timer: 11; }
+    50% { --timer: 10; }
+    55% { --timer: 9; }
+    60% { --timer: 8; }
+    65% { --timer: 7; }
+    70% { --timer: 6; }
+    75% { --timer: 5; }
+    80% { --timer: 4; }
+    85% { --timer: 3; }
+    90% { --timer: 2; }
+    95% { --timer: 1; }
+    100% { --timer: 0; }
+}
+
+@keyframes timeline {
+    // 0% { width: 100%; background: green; }
+    // 50% { width: 50%; brackground: orange; }
+    // 100% { width: 0%; background: red; }
+    0% { width: 0%; }
+    50% { width: 50%; }
+    100% { width: 100%; }
+}
+
+.game {
+    height: 100%;
+
+    #timer {
+      position: fixed;
+      left: 0;
+      line-height: 3rem;
+      height: 3rem;
+      text-align: center;
+      animation: timer 20s linear;
+    //   mix-blend-mode: difference;
+      font-size: 2rem;
+      width: 100%;
+    //   color: white;
+    //   background: black;
+    }
+    
+    #timer::before {
+        content:"";
+        width: 100%;
+        background: #3f51b5;
+        position: absolute;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        animation: timeline 20s linear;
+        animation-fill-mode: forwards;
+    }
+    
+    #timer::after {
+        counter-reset: timer var(--timer);
+        content: counter(timer);
+        font-weight: bold;
+    }
+  
+    .gameHeader {
+        height: 4rem;
+    }
+    .gameBody {
+        height: calc(100% - 4rem);
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        .myCards {
+            position: relative;
+            .avatar {
+                position: absolute;
+                left: 3rem;
+                .options {
+                    &.hide {
+                        display: none !important;
+                    }
+                    // z-index: -1;
+                    animation: show-animation 0.15s 1 ease-in;
+                    position: absolute;
+                    top: -4rem;
+                    left: -2rem;
+                    width: max-content;
+                    .withMargin {
+                        margin-top: 2rem;
+                    }
+                }
+                img{
+                    cursor: pointer;
+                    width: 5rem;
+                    height: 5rem;
+                    border-radius: 5rem;
+                }
+                .user-name {
+                    display: flex;
+                    justify-content: center;
+                }
+            }
+            .cards {
+                height: 13rem;
+                display: flex;
+                img {
+                    height: 12rem;
+                    cursor: pointer;
+                    align-self: flex-end;
+                    border-radius: 9px;
+                    image-rendering: -webkit-optimize-contrast;
+
+                    &:hover {
+                        height: 13rem;
+                    }
+                }
+            }
+        }
+        
+        .myCards {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+    }
+
+}
+
+// Animation
+// --------------------------------------
+@keyframes show-animation {
+    0% {
+        margin-top: 2rem;
+        z-index: -1;
+    }
+    100% {
+        z-index: 0;
+        margin-top: 0;
+    }
+}
+
+@-moz-keyframes show-animation {
+    0% {
+        margin-top: 2rem;
+        z-index: -1;
+    }
+    100% {
+        z-index: 0;
+        margin-top: 0;
+    }
+}
+
+@-webkit-keyframes show-animation {
+    0% {
+        margin-top: 2rem;
+        z-index: -1;
+    }
+    100% {
+        z-index: 0;
+        margin-top: 0;
+    }
+}
