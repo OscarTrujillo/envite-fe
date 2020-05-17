@@ -50,19 +50,6 @@ const ConnectedGame = (props: TgameProps) => {
     }
 
     const [myAvatarOptionsHide, setMyAvatarOptionsHide] = useState(true);
-    // const [progress, setProgress] = useState(0);
-
-    // useEffect(() => {
-    //     function tick() {
-    //         // reset when reaching 100%
-    //         setProgress((oldProgress) => (oldProgress >= 100 ? 0 : oldProgress + 1));
-    //       }
-      
-    //     const timer = setInterval(tick, 500);
-    //     return () => {
-    //         clearInterval(timer);
-    //     };
-    // });
 
     const onClickMyAvatar = () => {
         setMyAvatarOptionsHide(!myAvatarOptionsHide)
@@ -71,6 +58,7 @@ const ConnectedGame = (props: TgameProps) => {
         if (props.game?.id !== queryId) {
             props.getGame({_id: queryId});
         } 
+        // TODO: study this
         // else {
         //     if (props.game.gameStatus !== 'Running') {
         //         history.push('/site/game?id=' + queryId);
@@ -85,10 +73,9 @@ const ConnectedGame = (props: TgameProps) => {
                         >
                         Salir
                     </Button>
-                    
                 </div>
+                <div id="timer">Time left </div>
                 <div className="gameBody">
-                    {/* <LinearProgress variant="determinate" value={progress} /> */}
                     <div className="gameTop"></div>
                     <div className="gameMiddle"></div>
                     <div className="myCards">
